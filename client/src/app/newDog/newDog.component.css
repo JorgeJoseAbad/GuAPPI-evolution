@@ -1,0 +1,32 @@
+h3{
+  color:ANTIQUEWHITE;
+}
+
+h5{
+  color:ANTIQUEWHITE;
+  border-top: 2px solid red;
+}
+
+.form-group{
+  width: 220px;
+}
+
+.form-group label{
+  color: ANTIQUEWHITE;
+  font-family: serif;
+  font-variant: small-caps;
+  font-style: italic;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+form{
+  display: block;
+  align-content:flex-end;
+}
+
+
+img{
+  width: 100px;
+  height: auto;
+}

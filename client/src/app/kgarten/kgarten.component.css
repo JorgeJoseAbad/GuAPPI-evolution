@@ -1,0 +1,15 @@
+.list{
+  background-color: #bae3f3;
+  width: auto;
+  height: auto;
+}
+
+.dogList{
+  display: inline-block;
+  display: contents;
+  background-color: #b1eef3; 
+  margin: 5px;
+  padding: 10px;
+  border: 3px solid black;
+
+}

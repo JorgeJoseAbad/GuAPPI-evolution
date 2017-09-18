@@ -1,0 +1,129 @@
+<!-- EJEMPLO ORIGINAL -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="http://localhost:3000/public/images/snoopy222.jpg" width="30" height="30" alt="snoopy">
+  </a>
+  <a class="navbar-brand" href="#">GuAAPi takes care of your pets</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['login']">Login <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['signup']">Signup</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['dog']">Dogs</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Fin ejemplo original -->
+
+
+
+
+
+
+
+
+<!-- NAVBAR PROBADA ABAJO  -->
+<!--
+ <div class="container-fluid">
+      <div class="home-heading text-center row">
+          <h3>GuAAPi takes care of your pets</h3>
+      </div>
+</div>
+
+     Static navbar
+<div class="container-fluid">
+        <nav class="navbar navbar-default">
+
+            <div class="row">
+              <div class="navbar-header">
+                <div class="logo-image">
+                 <a href="/" class="nav-logo-link">
+                   <img class="img-circle" href="#" src="http://localhost:3000/public/images/snoopy222.jpg" alt="GuAPPi Logo">
+                 </a>
+
+               </div>
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-collapse">
+                <div class="row">
+                      <div class="col-md-3">
+                        <li class="active"><a [routerLink]="['login']">login</a></li>
+                      </div>
+                      <div class="col-md-3">
+                        <li><a [routerLink]="['signup']"> Signup</a></li>
+                      </div>
+                      <div class="col-md-3">
+                        <li><a [routerLink]="['dog']"> Dogs </a></li>
+                      </div>
+                      <div class="col-md-3">
+                        <li><a [routerLink]="['']"> Profile</a></li>
+                      </div>
+                </div>
+              </ul>
+
+            </div>/.nav-collapse
+            </div>/.row
+
+        </nav>
+        </div>/.container-fluid -->
+
+
+
+
+<!--
+  <div class="container-fluid">
+    <nav class="navbar">
+
+          <div class="row">
+                   <div class="logo-image">
+                      <a href="/" class="nav-logo-link">
+                        <img class="img-circle" src="http://localhost:3000/public/images/snoopy222.jpg" alt="GuAPPi Logo">
+                      </a>
+                    </div>
+                    brand image
+
+                      <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                          <div class="navbar-header">
+                            <a class="navbar-brand img-circle" href="#">
+
+                                <img alt="GuAPPi Logo" src="http://localhost:3000/public/images/snoopy222.jpg">
+
+                            </a>
+                          </div>
+                        </div>
+                      </nav>
+
+
+
+
+                    <div class="col-md-2">
+                      <a [routerLink]="['login']">login</a>
+                    </div>
+                      <div class="col-md-2">
+                    <a [routerLink]="['signup']"> Signup</a>
+                    </div>
+                      <div class="col-md-2">
+                    <a [routerLink]="['dog']"> Dogs </a>
+                    </div>
+                      <div class="col-md-2">
+                      <a [routerLink]="['']"> Profile</a>
+                    </div>
+
+
+        </div>
+</nav>
+
+  </div>-->

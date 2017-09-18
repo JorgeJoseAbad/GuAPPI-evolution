@@ -1,0 +1,11 @@
+
+<h3>{{ title }}</h3>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<button (click)="log()">Mapping dogs</button>
+<sebm-google-map [latitude]="lat" [longitude]="lng">
+  <div *ngFor="let dog of dogs" >
+    <sebm-google-map-marker [latitude]="dog.latitude" [longitude]="dog.longitude"></sebm-google-map-marker>
+  </div>
+</sebm-google-map>

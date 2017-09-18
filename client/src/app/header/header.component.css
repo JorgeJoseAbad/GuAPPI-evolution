@@ -1,0 +1,16 @@
+
+.navbar-brand{
+  font-style: oblique;
+  font-weight: bold;
+  text-transform: full-width;
+
+
+}
+
+img{
+  height: 50px;
+  width: auto;
+  border-radius: 25px;
+  border: 1px solid grey;
+
+}

@@ -1,0 +1,44 @@
+h3{
+  color:ANTIQUEWHITE;
+}
+
+h5{
+  color:ANTIQUEWHITE;
+  border-top: 2px solid red;
+}
+
+span{
+  color:ANTIQUEWHITE;
+  font-size: 14px;
+}
+
+.newdog{
+  color: black;
+  background-color: #c3bebe;
+  height: auto;
+  width: 130px;
+  margin: 10px;
+  padding: 0px 5px;
+  border: 4px groove grey;
+}
+
+.dogList1{
+  width: 400px;
+}
+
+.dogList2{
+  margin-left: 20px;
+}
+
+.dogList2 p{
+  color: ANTIQUEWHITE;
+  font-family:sans-serif;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+img{
+  width: 100px;
+  height: auto;
+}

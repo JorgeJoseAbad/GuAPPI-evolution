@@ -1,0 +1,43 @@
+
+h3{
+    color: ANTIQUEWHITE;
+    text-align: center;
+}
+
+.form-group{
+  width: 200px;
+}
+
+.form-group label{
+  color: ANTIQUEWHITE;
+  font-family: serif;
+  font-variant: small-caps;
+  font-style: italic;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.buttons-area button{
+  display:block;
+  width: 70px;
+}
+
+.text-general{
+  width: 300px;
+  color: ANTIQUEWHITE;
+  font-family: serif;
+  font-variant:inherit;
+  font-style: italic;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.text-general pre{
+  width: 300px;
+  color: ANTIQUEWHITE;
+  font-family: serif;
+  font-variant:inherit;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: normal;
+}

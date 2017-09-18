@@ -1,0 +1,54 @@
+<h3>
+  Add a new dog to your list {{this.user.username}}
+</h3>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 centered-form">
+      <form class="form-group" action="/newDog" method="post">
+
+        <div class="form-group">
+          <label> Dog Name </label>
+          <input type="text" [(ngModel)]="newDog.dogName" name="dogName"/>
+        </div>
+
+        <div class="form-group">
+          <label> Breed </label>
+          <input type="text" [(ngModel)]="newDog.breed" name="breed"/>
+        </div>
+
+        <div class="form-group">
+          <label> age </label>
+          <input type="number" [(ngModel)]="newDog.age" name="age"/>
+        </div>
+
+        <div class="form-group">
+          <label> Description </label>
+          <input type="textarea" [(ngModel)]="newDog.description" name="description"/>
+        </div>
+
+        <div class="form-group">
+          <label>Photo</label>
+            <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+          </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+        </div>
+        <br>
+
+
+        <button (click)="addDog()"> addDog </button>
+
+      </form>
+      <div *ngIf="dog">
+        <h2> You are now logged in as {{ newDog.dogName }}!! </h2>
+        <p> Here's the dog component </p>
+        <pre> {{ newDog | json }} </pre>
+
+      </div>
+        <p class="error"> {{ error }} </p>
+    </div>
+  </div>
+</div>

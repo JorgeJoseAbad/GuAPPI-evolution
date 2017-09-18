@@ -1,0 +1,9 @@
+      <p>Dog Name: {{dogName}}</p>
+      <img [src]='imageURL' alt="dog image"/>
+      <p>Dog's owner: {{owner}}</p>
+      <p>Adopted by: {{adopter}}</p>
+      <!--<p> DogID: {{pet.dog_id}}</p>
+      <p> Dog owner: {{pet.userProp_id}}</p>
+      <p> Dog Friend: {{pet.userAdopt_id}}</p>-->
+
+      <button (click)=adoptDog(pet._id,this.session.user._id)>Adopt it!</button>

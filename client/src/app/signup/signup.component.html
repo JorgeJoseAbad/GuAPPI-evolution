@@ -1,0 +1,47 @@
+<h3>
+  Fill in your user details here
+</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 centered-form">
+      <form action="/signup" method="post">
+
+        <div class="form-group">
+          <label> username </label>
+          <input type="text" [(ngModel)]="formInfo.username" name="username"/>
+        </div>
+
+        <div class="form-group">
+          <label> password </label>
+          <input type="password" [(ngModel)]="formInfo.password" name="password"/>
+        </div>
+
+        <div class="form-group">
+          <label> email </label>
+          <input type="text" [(ngModel)]="formInfo.email" name="email"/>
+        </div>
+
+        <div class="form-group">
+          <label> address </label>
+          <input type="textarea" [(ngModel)]="formInfo.address" name="address"/>
+        </div>
+        <div class="buttons-area">
+          <button (click)="signup()"> signup </button>
+          <button (click)="logout()"> logout </button>
+          <button (click)="getPrivateData()">private data </button>
+        </div>
+
+      </form>
+      <div *ngIf="user" class="text-general">
+        <h2> You are now logged in as {{ user.username }}!! </h2>
+        <p> Here's the user object </p>
+        <pre> {{ user | json }} </pre>
+
+        <p *ngIf="privateData"> Here's some data fetched from a protected API </p>
+        <pre> {{ privateData | json }} </pre>
+
+      </div>
+        <p class="error"> {{ error }} </p>
+    </div>
+  </div>
+</div>
