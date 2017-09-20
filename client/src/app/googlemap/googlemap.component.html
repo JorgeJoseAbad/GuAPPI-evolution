@@ -3,9 +3,34 @@
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<button (click)="log()">Mapping dogs</button>
+<div class="buttons">
+  <div class="text">
+  You can look in map where are the dogs and where are you
+  </div>
+
+  <button (click)="mapAllDogs()">Map dogs</button>
+  <button (click)="mapLogedUser()">Map user</button>
+</div>
+
+<!--
 <sebm-google-map [latitude]="lat" [longitude]="lng">
   <div *ngFor="let dog of dogs" >
     <sebm-google-map-marker [latitude]="dog.latitude" [longitude]="dog.longitude"></sebm-google-map-marker>
-  </div>
+
+    <sebm-google-map-marker [latitude]="logUser.latitude" [longitude]="logUser.longitude"></sebm-google-map-marker>
+</div>
 </sebm-google-map>
+-->
+<agm-map [latitude]="lat" [longitude]="lng">
+  <div *ngFor="let dog of dogs" >
+    <agm-marker [latitude]="dog.latitude"
+                [longitude]="dog.longitude">
+    </agm-marker>
+  </div>
+  <div *ngIf="logUser">
+    <agm-marker [latitude]="logUser.latitude"
+                [longitude]="logUser.longitude"
+                [iconUrl]="userMarker.icon">
+    </agm-marker>
+  </div>
+</agm-map>

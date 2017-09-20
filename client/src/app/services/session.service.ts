@@ -12,7 +12,9 @@ export interface User{
   username:string,
   password:string,
   email:string,
-  address: string
+  address: string,
+  longitude: string,
+  latitude: string
 }
 
 @Injectable()

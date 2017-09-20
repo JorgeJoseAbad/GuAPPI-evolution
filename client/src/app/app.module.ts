@@ -19,7 +19,9 @@ import { FileUploadModule} from 'ng2-file-upload';
 import { FooterComponent } from './footer/footer.component';
 import { CentralareaComponent } from './centralarea/centralarea.component';
 
-import { AgmCoreModule } from 'angular2-google-maps/core';
+//import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule } from '@agm/core';
+
 import { GooglemapComponent } from './googlemap/googlemap.component';
 import { KgartenComponent } from './kgarten/kgarten.component';
 import { NewDogComponent } from './newDog/newDog.component';
@@ -30,7 +32,7 @@ import { SessionService} from './services/session.service';
 import { KgartenService} from './services/kgarten.service';
 
 
-import {environment} from '../environments/environment';
+import { environment} from '../environments/environment';
 import { KgartenchieldComponent } from './kgartenchield/kgartenchield.component';
 
 

@@ -25,6 +25,13 @@
           <label> address </label>
           <input type="textarea" [(ngModel)]="formInfo.address" name="address"/>
         </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input placeholder="search for location"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+        </div>
+        <br>
+
         <div class="buttons-area">
           <button (click)="signup()"> signup </button>
           <button (click)="logout()"> logout </button>

@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DogService} from '../services/dog.service';
 import { ElementRef, NgZone, ViewChild } from '@angular/core';
 import { FormControl } from "@angular/forms";
-import { MapsAPILoader,AgmCoreModule } from 'angular2-google-maps/core';
+import { MapsAPILoader,AgmCoreModule } from '@agm/core'
+//import { MapsAPILoader,AgmCoreModule } from 'angular2-google-maps/core';
 import { FileUploader } from "ng2-file-upload";
 import { SessionService} from '../services/session.service';
 

@@ -12,6 +12,8 @@ exports.createUser = function(req, res, next) {
       email: req.body.email,
       password:req.body.password,
       direction:req.body.direction,
+			longitude:req.body.longitude,
+			latitude:req.body.latitude,
       imgUrl:req.body.imgUrl
 
 	});
@@ -24,6 +26,8 @@ exports.createUser = function(req, res, next) {
                 email: item.email,
                 password: item.password,
                 direction: item.direction,
+								longitude:item.longitude,
+								latitude:item.latitude,
                 imgUrl: item.imgUrl,
                 created_at:item.created_at,
                 updated_at: item.updated_at

@@ -1,8 +1,15 @@
-.sebm-google-map-container {
+agm-map {
   height: 300px;
 }
 
 h3{
     color: ANTIQUEWHITE;
     text-align: center;
+}
+
+.buttons .text{
+  color: #dbe297;
+  font-style: normal;
+  font-family: "Goudy Bookletter 1911", sans-serif;
+  text-align: justify;
 }

@@ -11,6 +11,14 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   address: String,
+  latitude:{
+    type: Number,
+    required: false
+  },
+  longitude:{
+    type: Number,
+    required: false
+  },
   imgUrl     : {
     type: String,
     default: "https://placeholdit.imgix.net/~text?txtsize=33&txt=250%C3%97250&w=250&h=250"
