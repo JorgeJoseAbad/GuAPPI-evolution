@@ -65,7 +65,10 @@ export class SessionService {
 
     logout() {
       return this.http.post(`${BASEURL}/logout`,{},{withCredentials:false})
-        .map(res => res.json())
+        .map(res => {
+                      res.json();
+                      console.log(res.json());
+                    })
         .catch(this.handleError);
     }
 

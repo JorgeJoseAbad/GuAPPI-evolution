@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Rx';
 export class KgartenService {
   BASE_URL: string = 'http://localhost:3000';
 
-
+  routePair;
   constructor(private http: Http) { }
 
 
@@ -18,7 +18,6 @@ export class KgartenService {
       console.log("en getlist kgarten service");
       return this.http.get(`${this.BASE_URL}/api/kgarten`)
         .map((res) => res.json());
-
     }
 
     get(id) {
@@ -36,6 +35,19 @@ export class KgartenService {
       console.log(dogKgarten,updatedPet);
       return this.http.put(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet)
         .map((res) => res.json());
+    }
+
+   /*receive the pet adopted from kgartenchield component*/
+    traceRoute(pet){
+      console.log("in kartenservice trazeRoute",pet);
+      this.routePair=pet;
+      console.log("routePair",this.routePair);
+    }
+
+    /*return adopted pet to googlemapComponent*/
+    getRoute(){
+      console.log("in getRoute");
+      return this.routePair;
     }
 
 

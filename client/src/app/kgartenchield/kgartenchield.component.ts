@@ -69,25 +69,24 @@ getAdopterName(id){
 }
 
 adoptDog(id,adopt_id){
-  console.log("adopting dog");
-  console.log(this.session.user.username);
-  this.adopter=this.session.user.username;
-  console.log(id);
-  console.log(adopt_id);
-  console.log(this.pet);
-
-
+    console.log("adopting dog");
+    console.log(this.session.user.username);
+    this.adopter=this.session.user.username;
+    console.log(id);
+    console.log(adopt_id);
+    console.log(this.pet);
     this.updatedPet.dog_id=this.pet.dog_id;
     this.updatedPet.userAdopt_id=adopt_id;
     this.updatedPet.userProp_id=this.pet.userProp_id;
-
     console.log(this.updatedPet);
-
-  this.kgartenservice.edit(id,this.updatedPet)
+    this.kgartenservice.edit(id,this.updatedPet)
     .subscribe((pet)=>{
       console.log(pet);
-      
     })
+    /*Send kagarten service the adopted pet*/
+    this.kgartenservice.traceRoute(this.updatedPet);
+    
+
 
 }
 

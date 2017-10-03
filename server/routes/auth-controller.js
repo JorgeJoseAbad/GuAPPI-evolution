@@ -97,7 +97,8 @@ authController.post("/login", function(req, res, next) {
   })(req, res, next);
 });
 
-authController.post("/logout", function(req, res) {
+authController.post("/logout", function(req, res, next) {
+  console.log("estoy en logout");
   req.logout();
   res.status(200).json({ message: 'Success' });
 });
