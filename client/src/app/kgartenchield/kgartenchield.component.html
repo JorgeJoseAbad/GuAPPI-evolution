@@ -7,3 +7,8 @@
       <p> Dog Friend: {{pet.userAdopt_id}}</p>-->
 
       <button (click)=adoptDog(pet._id,this.session.user._id)>Adopt it!</button>
+      <button (click)=pulloutDog(pet._id)>pull out dog</button>
+
+<!--<h6 *ngIf="this.user._id==this.owner">
+
+</h6>-->

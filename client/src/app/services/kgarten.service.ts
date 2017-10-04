@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 
-//dejo esto a la espera de implrmemntar la BBDD
+
 
 @Injectable()
 export class KgartenService {
@@ -37,6 +37,15 @@ export class KgartenService {
         .map((res) => res.json());
     }
 
+    delete(id) {
+      console.log("id a eliminar");
+      console.log(id);
+      return this.http.delete(`${this.BASE_URL}/api/kgarten/${id}`)
+        .map((res) => res.json());
+
+        //.catch(this.handleError);
+    }
+
    /*receive the pet adopted from kgartenchield component*/
     traceRoute(pet){
       console.log("in kartenservice trazeRoute",pet);
@@ -61,9 +70,6 @@ export class KgartenService {
         .map((res) => res.json());
     }*/
 
-    remove(id) {
-      return this.http.delete(`${this.BASE_URL}/api/dog/${id}`)
-        .map((res) => res.json());
-    }
+
 
 }

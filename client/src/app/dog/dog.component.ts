@@ -73,6 +73,14 @@ sendDogKgarten(dogKgartenId,ownerId){
       console.log(dogKgarten);
     })
 }
+
+deleteDog(dogId){
+  this.dogservice.remove(dogId)
+    .subscribe((response)=>{
+      console.log(response);
+      this.router.navigate(['']);
+    })
+}
 /*
   createNewDog(){
     this.dog.add().suscribe

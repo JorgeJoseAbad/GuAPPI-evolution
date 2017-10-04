@@ -1,17 +1,15 @@
 
 <h3>{{ title }}</h3>
 
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-
 <div class="buttons">
   <div class="text">
-  You can look in map where are the dogs and where are you
+  You can look in map where are the dogs, where are logged user, and position between
+  logged user and last dog adopted
   </div>
 
   <button (click)="mapAllDogs()">Map dogs</button>
   <button (click)="mapLogedUser()">Map user</button>
-  <button (click)="trazeRoute()">show pair</button>
+  <button (click)="trazeRoute()">Show rute adoption</button>
 </div>
 
 <agm-map  id="map" [latitude]="lat" [longitude]="lng">
@@ -39,7 +37,7 @@
       >
     </agm-circle>
   </div>
-  
+
   <div *ngIf="destinationDog">
     <agm-circle
         [latitude]="destinationDog.lat"

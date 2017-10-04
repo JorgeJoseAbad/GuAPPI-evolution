@@ -69,26 +69,40 @@ exports.readDog=function(req,res,next){
 
    //intento sacar perros segun el id del usuario logueado
 	 //el req.params.id seria el user_id.
-	 exports.readDogByIdUser=function(req,res,next){
-	 			console.log(req.params.id);
-	 	  	dogModel.find({user_id:req.params.id}, function(err, dog) {
-	 				if (err) {
-	 					return res.json(err);
-	 				}
-	 				return res.json(dog);
-	 	  	});
-	    };
+ exports.readDogByIdUser=function(req,res,next){
+ 			console.log(req.params.id);
+ 	  	dogModel.find({user_id:req.params.id}, function(err, dog) {
+ 				if (err) {
+ 					return res.json(err);
+ 				}
+ 				return res.json(dog);
+ 	  	});
+    };
 
 			//Lee el perro por su id es directo de un get(/:id)
-			exports.readDogById=function(req,res,next){
-					 console.log(req.params.id);
-					 dogModel.find({_id:req.params.id}, function(err, dog) {
-						 if (err) {
-							 return res.json(err);
-						 }
-						 return res.json(dog);
-					 });
-				 };
+		exports.readDogById=function(req,res,next){
+				 console.log(req.params.id);
+				 dogModel.find({_id:req.params.id}, function(err, dog) {
+					 if (err) {
+						 return res.json(err);
+					 }
+					 return res.json(dog);
+				 });
+			 };
+
+		exports.deleteDog=function(req,res,next){
+				console.log(req.params.id);
+				dogModel.remove({_id:req.params.id},function(err,dog){
+					if (err){
+						return res.json(err);
+					}
+					return res.json({
+						message: 'dog has been removed!'
+					});
+					
+				});
+
+		};
 
 /*
 exports.createList = function(req, res, next) {

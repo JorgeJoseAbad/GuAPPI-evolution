@@ -7,20 +7,10 @@
 <button (click)="getListAllDogs()"> view all dogs </button>
 <br>
 <p class="newdog" [routerLink]="['../newDog']">Add a new Dog</p>
-<!--<button (click)"createNewDog()"> I have a new dog</button>-->
+
 
     <div *ngFor="let dog of dogs"  class="dogList2">
 
-          <!--Not used finally, Left as sample
-          <h5 *ngIf="this.user._id==dog.user_id">
-            <p>Dog owner: {{this.user.username}}</p>
-          </h5>
-
-           si no coinciden los ID, intento buscar...
-          <h5 *ngIf="this.user._id!=dog.user_id">
-                   Llamo a un metodo del componente y me devuelve el "owner"
-                  El problema es que este owner pasa a ser el de toda la lista de perros,
-                  escepto el del usuario logueado-->
           <h5>
                 <app-childdog [dog]="dog">
 
@@ -39,6 +29,7 @@
 
       <h6 *ngIf="this.user._id==dog.user_id">
         <button (click)="sendDogKgarten(this.dog._id,this.user._id)"> Send {{dog.dogName}} to Kgarten </button>
+        <button (click)="deleteDog(this.dog._id)">Delete dog</button>
       </h6>
     </div>
 

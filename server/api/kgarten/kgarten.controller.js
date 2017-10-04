@@ -73,3 +73,19 @@ exports.editKgarten=function(req,res,next){
     });
 
 };
+
+exports.removeKgarten=function(req,res){
+  console.log("estoy intentando quitar uno de la guarderia");
+  console.log(req.params.id);
+  kgarten.remove({_id:req.params.id},function(err,dog){
+    console.log("dentro de remove");
+    if (err){
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json({
+      message: 'dog has been removed from kgarten!'
+    });
+
+  });
+};

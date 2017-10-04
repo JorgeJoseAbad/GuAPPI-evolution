@@ -9,6 +9,6 @@ router.post('/', controller.enterDog);
 router.get('/',controller.listkgarten);
 //router.get('/:id', controller.readKgarten);
 router.put('/:id', controller.editKgarten);  //falta pasar un body
-//router.delete('/:id', controller.removeKgarten);
+router.delete('/:id', controller.removeKgarten);
 
 module.exports = router;

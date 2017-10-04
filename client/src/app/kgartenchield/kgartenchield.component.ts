@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 import { DogService } from '../services/dog.service';
 import { SessionService } from '../services/session.service';
 import { KgartenService} from '../services/kgarten.service';
@@ -20,18 +21,23 @@ export class KgartenchieldComponent implements OnInit {
     userAdopt_id:'',
     userProp_id:'',
   };
+  user;
 
 
   constructor(
     private dogservice: DogService,
     private session:SessionService,
-    private kgartenservice: KgartenService) { }
+    private kgartenservice: KgartenService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+
     this.getDogName(this.pet.dog_id);
     this.getOwnerName(this.pet.userProp_id);
     this.getAdopterName(this.pet.userAdopt_id);
     this.getDogImage(this.pet.dog_id);
+
   }
 
   getDogName(id){
@@ -85,9 +91,16 @@ adoptDog(id,adopt_id){
     })
     /*Send kagarten service the adopted pet*/
     this.kgartenservice.traceRoute(this.updatedPet);
-    
 
+}
 
+pulloutDog(id){
+  
+  this.kgartenservice.delete(id)
+    .subscribe((res)=>{
+      console.log(res);
+      this.router.navigate(['']);
+    })
 }
 
 
