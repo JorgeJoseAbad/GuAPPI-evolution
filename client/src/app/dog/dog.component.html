@@ -1,6 +1,7 @@
 
 <div class="dogList1">
-  <h5> Hello, {{this.user.username}}</h5>
+
+<h5 *ngIf="this.user" >Hello, {{this.user.username}}</h5>
 <h3> Dogs list </h3>
 
 <button (click)="getListMyDogs()"> view my dogs </button>
@@ -8,14 +9,12 @@
 <br>
 <p class="newdog" [routerLink]="['../newDog']">Add a new Dog</p>
 
-
+<div *ngIf="this.user; else elseBlock" >
     <div *ngFor="let dog of dogs"  class="dogList2">
 
           <h5>
                 <app-childdog [dog]="dog">
-
                 </app-childdog>
-
           </h5>
 
           <h3> Dog name: {{ dog.dogName }}&nbsp;</h3>
@@ -32,5 +31,9 @@
         <button (click)="deleteDog(this.dog._id)">Delete dog</button>
       </h6>
     </div>
+  </div>
+  <ng-template #elseBlock >
+    <div class="advert" >You must be logged to see list of dogs</div>
+  </ng-template>
 
   </div>

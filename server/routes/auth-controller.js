@@ -97,7 +97,7 @@ authController.post("/login", function(req, res, next) {
   })(req, res, next);
 });
 
-authController.post("/logout", function(req, res, next) {
+authController.post("/logout",function(req, res, next) {
   console.log("estoy en logout");
   req.logout();
   res.status(200).json({ message: 'Success' });
@@ -126,15 +126,6 @@ authController.get("/private", (req, res) => {
 
 });
 
-
-
-/* CREATE a new Phone.
-authController.post('/uploadfile', upload.single('file'), function(req, res) {
-  return res.json({
-    message: 'New Phone created!',
-  });
-});
-*/
 
 
 

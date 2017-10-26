@@ -47,7 +47,7 @@ export class SessionService {
       return this.http.post(`${BASEURL}/login`, user ,this.options)
       .map(res => {
         this.user = res.json();
-        return this.user;
+        //return this.user;
       })
         .catch(this.handleError);
     }
@@ -58,16 +58,18 @@ export class SessionService {
       return this.http.get(`${BASEURL}/loggedin`, this.options)
         .map(res => {
           this.user = res.json();
-          return this.user;
+          //return this.user;
         })
         .catch(this.handleError);
     }
 
     logout() {
-      return this.http.post(`${BASEURL}/logout`,{},{withCredentials:false})
+      return this.http.post(`${BASEURL}/logout`,{},this.options )
         .map(res => {
                       res.json();
                       console.log(res.json());
+                      //console.log(`Debería ser null?: ${this.user.username}`)
+                      //return this.user;
                     })
         .catch(this.handleError);
     }

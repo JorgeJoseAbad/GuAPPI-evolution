@@ -38,6 +38,7 @@ export class DogComponent implements OnInit {
     //  .subscribe((dogs) => {
     //    this.dogs = dogs;
     //  });
+    console.log("in ngOnInit dog component");
     this.user=this.session.user;
     console.log(this.user);
   }

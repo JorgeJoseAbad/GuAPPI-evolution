@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express            = require('express');
 const path               = require('path');
 const favicon            = require('serve-favicon');
@@ -14,7 +15,7 @@ const authController     = require("./routes/auth-controller");
 const cors               = require('cors');
 const index              = require('./routes/index');
 const users              = require('./routes/users');
-require("dotenv").config();
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI);
@@ -28,7 +29,7 @@ passportSetup(passport);
 // Passport config
 app.use(session({
   secret: "guappi-secret",
-  resave: false,
+  resave: true,
   saveUninitialized: true,
   cookie : { httpOnly: true, maxAge: 60000 },
   store: new MongoStore({

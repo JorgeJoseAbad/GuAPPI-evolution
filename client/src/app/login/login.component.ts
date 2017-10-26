@@ -31,6 +31,12 @@ export class LoginComponent implements OnInit {
            (user) => this.successCb(user),
            (err) => this.errorCb(err)
          );*/
+
+    this.session.isLoggedIn()
+      .subscribe(
+        (user) => this.successCb(user)
+      );
+
   }
 
   login() {
@@ -50,7 +56,9 @@ export class LoginComponent implements OnInit {
        .subscribe(
          () => this.successCb(null),
          (err) => this.errorCb(err)
-       );
+       )
+       console.log("in logout login component ts");
+       console.log(this.user);
    }
 
    getPrivateData(user) {
@@ -70,6 +78,7 @@ export class LoginComponent implements OnInit {
    successCb(user) {
      this.user = user;
      this.error = null;
+     console.log(this.user);
    }
 
 }

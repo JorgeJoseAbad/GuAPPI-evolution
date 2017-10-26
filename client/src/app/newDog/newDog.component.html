@@ -2,6 +2,7 @@
   Add a new dog to your list {{this.user.username}}
 </h3>
 
+<div *ngIf="this.user; else elseBlock" >
 <div class="container">
   <div class="row">
     <div class="col-sm-6 centered-form">
@@ -52,3 +53,7 @@
     </div>
   </div>
 </div>
+</div>
+<ng-template #elseBlock >
+  <div class="advert" >You must be logged to add a new dog</div>
+</ng-template>

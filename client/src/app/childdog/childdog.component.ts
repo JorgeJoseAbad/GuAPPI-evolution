@@ -17,7 +17,7 @@ import { SessionService} from '../services/session.service';
 export class ChilddogComponent implements OnInit {
   @Input() dog:any;
   @Output() onGetOwner = new EventEmitter<string>(); //nNot used finally
-  owner$:  Observable<object>; // Not used finally
+  //owner$:  Observable<object>; // Not used finally
   name: string; // to get username in Observable
 
 
@@ -43,8 +43,8 @@ export class ChilddogComponent implements OnInit {
       .subscribe((dog_owner)=>{
         console.log(dog_owner);
         this.name=dog_owner.username
-        this.owner$=dog_owner;
-        console.log(this.owner$);
+        //this.owner$=dog_owner;
+        //console.log(this.owner$);
       });
 
     }

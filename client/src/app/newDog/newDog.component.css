@@ -30,3 +30,12 @@ img{
   width: 100px;
   height: auto;
 }
+
+.advert{
+  font-size: 20px;
+  font-weight:inherit;
+  color: #f1f135;
+  text-align: center;
+
+  background-color: rgba(110, 110, 50, 0.5)
+}
