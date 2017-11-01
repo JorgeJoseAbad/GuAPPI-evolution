@@ -1,6 +1,7 @@
 const Q = require('q');
 const _ = require('lodash');
 mongoose = require('mongoose');
+const fs         = require('fs');
 
 const dogModel = require('./dog.model');
 
@@ -92,14 +93,33 @@ exports.readDog=function(req,res,next){
 
 		exports.deleteDog=function(req,res,next){
 				console.log(req.params.id);
-				dogModel.remove({_id:req.params.id},function(err,dog){
+				dogModel.findByIdAndRemove({_id:req.params.id},function(err,dog){
+					console.log(dog);
+					console.log(dog.imgUrl);
+		      var picToDelete='public'+dog.imgUrl;
+		      console.log(picToDelete);
 					if (err){
 						return res.json(err);
+					}
+					else{
+						fs.unlink(picToDelete, (err) => {
+		          try{
+		            if (err) throw err;
+
+		          }
+		          catch (err){
+		            console.log(err);
+
+		          }
+		          finally {
+		            console.log("unlink made");
+		          }
+		        });
 					}
 					return res.json({
 						message: 'dog has been removed!'
 					});
-					
+
 				});
 
 		};
