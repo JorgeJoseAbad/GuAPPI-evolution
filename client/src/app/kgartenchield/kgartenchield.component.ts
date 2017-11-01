@@ -106,7 +106,7 @@ pulloutDog(id){
   this.kgartenservice.delete(id)
     .subscribe((res)=>{
       console.log(res);
-      this.router.navigate(['']);
+      //this.router.navigate(['']); no util
     })
 }
 

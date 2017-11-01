@@ -67,7 +67,7 @@ sendDogKgarten(dogKgartenId,ownerId){
   console.log(ownerId);
   this.dogKgarten.dog_id=dogKgartenId;
   this.dogKgarten.prop_id=ownerId;
-  this.dogKgarten.adopt_id=ownerId;
+  this.dogKgarten.adopt_id=null; 
   this.kgartenservice.add(this.dogKgarten)
     .subscribe((dogKgarten)=>{
       this.dogKgarten=dogKgarten;

@@ -27,6 +27,12 @@ export class KgartenComponent implements OnInit {
     });;
   }
 
+updateKgarten(){
+  this.petgarden.getList()
+  .subscribe((pets) => {
+    this.pets = pets;
+  });;
+}
 
 
 }
