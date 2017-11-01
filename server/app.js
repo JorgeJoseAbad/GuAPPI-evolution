@@ -23,31 +23,7 @@ console.log("connecting to mongo: ");
 
 const app = express();
 
-const passportSetup = require('./config/passport');
-passportSetup(passport);
 
-// Passport config
-app.use(session({
-  secret: "guappi-secret",
-  resave: true,
-  saveUninitialized: true,
-  cookie : { httpOnly: true, maxAge: 60000 },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
-  })
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(logger('dev'));
-app.use(cookieParser());
-app.use('/bower_components', express.static(path.join(__dirname, 'bower_components/')));
-app.use(express.static(path.join(__dirname, 'public')));
 
 var whitelist = [
     'http://localhost:4200',
@@ -61,6 +37,35 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+
+const passportSetup = require('./config/passport');
+passportSetup(passport);
+
+// Passport config
+app.use(session({
+  secret: "guappi-secret",
+  resave: true,
+  saveUninitialized: true,
+  cookie : { httpOnly: true, maxAge: 2419200000},
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(logger('dev'));
+app.use(cookieParser());
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components/')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 require('./routes/index')(app);
 

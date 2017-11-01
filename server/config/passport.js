@@ -6,8 +6,6 @@ module.exports = function (passport) {
 
   console.log("llegamos a pasportjs");
 
-
-
   passport.use(new LocalStrategy((username, password, next) => {
     User.findOne({ username }, (err, user) => {
       if (err) {
@@ -29,19 +27,24 @@ module.exports = function (passport) {
 
   passport.serializeUser((user, cb) => {
     console.log("SERIALIZE USER");
+    console.log(user);
     console.log(user._id);
-    console.log(user.id);
     cb(null, user._id); //poner user._id ??
   });
 
+
+
   passport.deserializeUser((id, cb) => {
     console.log("DESESERIALIZE USER");
+    console.log("id que se busca: "+id);
     User.findOne({ "_id": id }, (err, user) => {
       if (err) { return cb(err); }
       cb(null, user);
     });
 
   });
+
+
 
 
 };

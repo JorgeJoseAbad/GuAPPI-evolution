@@ -90,7 +90,11 @@ authController.post("/login", function(req, res, next) {
           message: 'something went wrong :('
         });
       } else{
-        console.log("dentro del req.login, correcto");
+        console.log("dentro del authController.post --> req.login: correcto");
+        console.log("req.session.passport.user y despues req.user");
+        console.log(req.session.passport.user);
+        console.log(req.session);
+        console.log(req.user);
         res.status(200).json(req.user);}
 
     });
@@ -103,7 +107,7 @@ authController.post("/logout",function(req, res, next) {
   res.status(200).json({ message: 'Success' });
 });
 
-authController.get("/loggedin", function(req, res) {
+authController.get("/loggedin", function(req, res, next) {
   console.log("authcontroller.get /loggedin");
   if(req.isAuthenticated()) {
     return res.status(200).json(req.user);
@@ -116,6 +120,11 @@ authController.get("/loggedin", function(req, res) {
 authController.get("/private", (req, res) => {
   console.log("estoy en authcontroller private");
   console.log(req.session);
+
+  //esto parece que no funciona porque se pierde req.session.passport.user;
+  //y esto daría error;
+  //console.log("req.session.passport.user: "+req.session.passport.user);
+
   if(req.isAuthenticated()) {
     return res.json({ message: 'This is a private message' });
   }

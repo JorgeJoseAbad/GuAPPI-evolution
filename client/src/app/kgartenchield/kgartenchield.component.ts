@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DogService } from '../services/dog.service';
 import { SessionService } from '../services/session.service';
@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
   templateUrl: './kgartenchield.component.html',
   styleUrls: ['./kgartenchield.component.css']
 })
-export class KgartenchieldComponent implements OnInit {
+
+
+export class KgartenchieldComponent implements OnInit,OnChanges{
   @Input() pet:any;
   dogName:any;
   owner:any;
@@ -21,7 +23,7 @@ export class KgartenchieldComponent implements OnInit {
     userAdopt_id:'',
     userProp_id:'',
   };
-  user;
+  user:any=null;
 
 
   constructor(
@@ -38,6 +40,11 @@ export class KgartenchieldComponent implements OnInit {
     this.getAdopterName(this.pet.userAdopt_id);
     this.getDogImage(this.pet.dog_id);
 
+  }
+
+  ngOnChanges(){
+    this.user=this.session.user;
+    console.log("in ngOnChanges this.user "+this.user);
   }
 
   getDogName(id){
@@ -95,7 +102,7 @@ adoptDog(id,adopt_id){
 }
 
 pulloutDog(id){
-  
+
   this.kgartenservice.delete(id)
     .subscribe((res)=>{
       console.log(res);

@@ -23,14 +23,14 @@
         </div>
       </form>
       <div *ngIf="user" class="text-general">
-        <h4> You are now logged in as {{ user.username }}!! </h4>
-        <!--<h4> your id is {{user._id}}</h4>
+        <h4> You are now logged in as {{ user.username }} </h4>
+        <!-- <h4> your id is {{user._id}}</h4>
         <p> Here's the user object </p>
-        <pre> {{ user | json }} </pre>-->
-        <!-- commented code, but valid code-->
+        <pre> {{ user | json }} </pre>
+        commented code, but valid code-->
 
         <p *ngIf="privateData" class="text-general"> Here's some data fetched from a protected API </p>
-        <pre> {{ privateData | json }} </pre>
+        <pre> {{ privateData | json}} </pre>
 
       </div>
         <p class="error"> {{ error }} </p>

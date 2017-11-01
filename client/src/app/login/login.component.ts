@@ -26,15 +26,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
       console.log("on init");
-      /*this.session.isLoggedIn()
-         .subscribe(
-           (user) => this.successCb(user),
-           (err) => this.errorCb(err)
-         );*/
+      
 
     this.session.isLoggedIn()
       .subscribe(
-        (user) => this.successCb(user)
+        (user) => this.successCb(user),
+        (err) => this.errorCb(err)
       );
 
   }
@@ -61,13 +58,16 @@ export class LoginComponent implements OnInit {
        console.log(this.user);
    }
 
-   getPrivateData(user) {
-     console.log(user);
+   getPrivateData() {
      this.session.getPrivateData()
        .subscribe(
          (data) => this.privateData = data,
          (err) => this.error = err
        );
+       console.log("this.privatedata o err: ")
+       console.log(this.privateData);
+       console.log(this.error);
+
    }
 
    errorCb(err) {

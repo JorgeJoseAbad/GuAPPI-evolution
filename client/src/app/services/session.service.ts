@@ -21,15 +21,15 @@ export interface User{
 export class SessionService {
   user:User;
   startLoginCompleted:boolean = false;
-  options:Object = {withCredentials:true};
+  options:Object = {withCredentials:false};
 
   constructor(private http: Http) {
-    this.isLoggedIn()
+    /*this.isLoggedIn()
         .subscribe( (user:User) =>{
         console.log(`Welcome again user ${user.username}`)
         this.user = user;
         this.startLoginCompleted = true;
-      }, e => this.startLoginCompleted = true);
+      }, e => this.startLoginCompleted = true);*/
     }
 
     handleError(e) {
@@ -45,20 +45,30 @@ export class SessionService {
 
     login(user) {
       return this.http.post(`${BASEURL}/login`, user ,this.options)
-      .map(res => {
+      .map(res =>this.user=res.json())
+      .catch(this.handleError);
+    } //ponendo este login, hace login pero el adoptar perros nofunciona
+
+    /*pruebo a cambiar esto login(user) {
+      return this.http.post(`${BASEURL}/login`, user ,this.options)
+      .map(res =>
+      {
         this.user = res.json();
-        //return this.user;
-      })
+        return this.user;
+      }
+    )
         .catch(this.handleError);
-    }
+    }*/
 
 //he cambiado el .post por un .get, que corresponde a lo que hay en
 // el server vuelvo a poner .post y post en el server
     isLoggedIn():Observable<User>{
       return this.http.get(`${BASEURL}/loggedin`, this.options)
         .map(res => {
+          console.log("this user in loggedin");
+          console.log(this.user);
           this.user = res.json();
-          //return this.user;
+          return this.user;
         })
         .catch(this.handleError);
     }
@@ -68,8 +78,7 @@ export class SessionService {
         .map(res => {
                       res.json();
                       console.log(res.json());
-                      //console.log(`Debería ser null?: ${this.user.username}`)
-                      //return this.user;
+                      this.user=null; //destroy this session user
                     })
         .catch(this.handleError);
     }
@@ -81,9 +90,10 @@ export class SessionService {
     }*/
 
     getPrivateData() {
-      return this.http.get(`${BASEURL}/private`,{withCredentials:false})
-        .map(res => res.json())
+      return this.http.get(`${BASEURL}/private`,{withCredentials:true})
+        .map(res => {res.json();return res.json();})
         .catch(this.handleError);
+
     }
 
     //Added to retrieve the user by Id
