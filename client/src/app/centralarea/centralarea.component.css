@@ -5,13 +5,13 @@ h1{
 }
 .lat-left{
   background-color: #ccffcc;
-  background-image: url("http://localhost:3000/public/images/fondoperro.jpg");
+  background-image: url("../../assets/fondoperro.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
 .lat-rigth{
   background-color: #ffccff;
-  background-image: url("http://localhost:3000/public/images/fondoperro.jpg");
+  background-image: url("../../assets/fondoperro.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
