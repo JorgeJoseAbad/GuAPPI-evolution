@@ -14,8 +14,13 @@
         </div>
 
         <div class="form-group">
+          
           <label> Breed </label>
-          <input type="text" [(ngModel)]="newDog.breed" name="breed"/>
+          <select  class="form-control"  id="breed" required
+              [(ngModel)]="newDog.breed" name="breed">
+            <option *ngFor="let breed of breeds" [value]="breed">{{breed}}</option>
+          </select>
+
         </div>
 
         <div class="form-group">

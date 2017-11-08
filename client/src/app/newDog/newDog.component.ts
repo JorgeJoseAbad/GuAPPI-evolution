@@ -28,13 +28,21 @@ export class NewDogComponent implements OnInit {
   user: any;
   username: string;
 
+  breeds = [
+    "Alsacian",
+    "setter",
+    "spaniel",
+    "chiguagua",
+    "podenco"
+  ];
+
 
    newDog = {
       user_id: '',
-      dogName: 'prueba ',
-      breed: '',
+      dogName: 'Place dog name',
+      breed: this.breeds[0],
       age: '',
-      description: '',
+      description: 'Place description',
       imgUrl: '',
       latitude: 6,
       longitude: 6
