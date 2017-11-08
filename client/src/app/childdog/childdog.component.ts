@@ -29,22 +29,15 @@ export class ChilddogComponent implements OnInit {
     this.getOwnerName(this.dog.user_id);
   }
 
-  //Not used finally, activated by button
-
   onGetDogOwner () {
       this.getOwnerName(this.dog.user_id);
       //this.onGetOwner.emit(this.dog.user_id);
     }
 
-    getOwnerName(id){
-      console.log("in getOwnerName");
-      console.log(id);
+    getOwnerName(id){  
       this.session.get(id)
       .subscribe((dog_owner)=>{
-        console.log(dog_owner);
         this.name=dog_owner.username
-        //this.owner$=dog_owner;
-        //console.log(this.owner$);
       });
 
     }

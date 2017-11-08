@@ -3,7 +3,8 @@
 </h2>
 <h5>Here are the dogs sent to care</h5>
 
-<button (click)="updateKgarten()">Update Kgarten</button>
+ <button (click)="updateKgarten()">Update Kgarten</button>
+ <div class="note">{{message}}</div>
 
 <div class="list">
   <div *ngFor="let pet of pets"  class="dogList">

@@ -34,13 +34,8 @@ export class DogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.dog.getList()
-    //  .subscribe((dogs) => {
-    //    this.dogs = dogs;
-    //  });
-    console.log("in ngOnInit dog component");
+
     this.user=this.session.user;
-    console.log(this.user);
   }
 
 
@@ -50,7 +45,6 @@ export class DogComponent implements OnInit {
       this.dogservice.getDogsByOwnerID(this.session.user._id)
         .subscribe((dogs) => {
           this.dogs = dogs;
-          console.log("lista de mis perros");
         });
       }
 
@@ -58,7 +52,6 @@ export class DogComponent implements OnInit {
       this.dogservice.getList()
         .subscribe((dogs) => {
           this.dogs = dogs;
-          console.log("lista de perros");
         });
       }
 
@@ -67,7 +60,7 @@ sendDogKgarten(dogKgartenId,ownerId){
   console.log(ownerId);
   this.dogKgarten.dog_id=dogKgartenId;
   this.dogKgarten.prop_id=ownerId;
-  this.dogKgarten.adopt_id=null; 
+  this.dogKgarten.adopt_id=null;
   this.kgartenservice.add(this.dogKgarten)
     .subscribe((dogKgarten)=>{
       this.dogKgarten=dogKgarten;
@@ -76,18 +69,14 @@ sendDogKgarten(dogKgartenId,ownerId){
 }
 
 deleteDog(dogId){
-  this.dogservice.remove(dogId)
-    .subscribe((response)=>{
-      console.log(response);
-      this.router.navigate(['']);
-    })
+  if (window.confirm('Are you sure you want delete this dog?')) {
+    this.dogservice.remove(dogId)
+      .subscribe((response)=>{
+        console.log(response);
+        this.router.navigate(['']);
+      })
+  }
 }
-/*
-  createNewDog(){
-    this.dog.add().suscribe
-
-   }
-*/
 
 /*
     getDogDetails(id) {
@@ -99,13 +88,5 @@ deleteDog(dogId){
 
     }
 */
-/* mas adelante
-      deleteDog(id) {
-      if (window.confirm('Are you sure?')) {
-        this.dog.remove(id)
-          .subscribe(() => {
-            this.router.navigate(['']);
-          });
-          }
-    }*/
+
 }

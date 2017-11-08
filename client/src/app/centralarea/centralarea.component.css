@@ -15,3 +15,10 @@ h1{
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.intro{
+  font-size: 10px;
+  border: 1px solid #FE2E64;
+  margin-bottom: 5px;
+  background-color: #F8ECE0;
+}

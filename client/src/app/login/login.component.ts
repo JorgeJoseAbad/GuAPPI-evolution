@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
       console.log("on init");
-      
+
 
     this.session.isLoggedIn()
       .subscribe(

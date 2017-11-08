@@ -47,21 +47,9 @@ export class SessionService {
       return this.http.post(`${BASEURL}/login`, user ,this.options)
       .map(res =>this.user=res.json())
       .catch(this.handleError);
-    } //ponendo este login, hace login pero el adoptar perros nofunciona
+    }
 
-    /*pruebo a cambiar esto login(user) {
-      return this.http.post(`${BASEURL}/login`, user ,this.options)
-      .map(res =>
-      {
-        this.user = res.json();
-        return this.user;
-      }
-    )
-        .catch(this.handleError);
-    }*/
 
-//he cambiado el .post por un .get, que corresponde a lo que hay en
-// el server vuelvo a poner .post y post en el server
     isLoggedIn():Observable<User>{
       return this.http.get(`${BASEURL}/loggedin`, this.options)
         .map(res => {
@@ -83,11 +71,7 @@ export class SessionService {
         .catch(this.handleError);
     }
 
-    /*isLoggedIn() {
-      return this.http.get(`${BASEURL}/loggedin`,{withCredentials:false})
-        .map(res => res.json())
-        .catch((err) => this.handleError(err));
-    }*/
+
 
     getPrivateData() {
       return this.http.get(`${BASEURL}/private`,{withCredentials:true})
@@ -103,4 +87,3 @@ export class SessionService {
       .catch(this.handleError);
     }
 }
-//he cambiado todos lod withCredential de true a false para poder hacer login
