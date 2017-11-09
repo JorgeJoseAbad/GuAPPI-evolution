@@ -16,6 +16,9 @@ export class DogComponent implements OnInit {
   dogs;
   mdogs;
   owner;
+
+imgorigin=environment.apiUrl;
+
   user:any;
 
   kgarten: any;
