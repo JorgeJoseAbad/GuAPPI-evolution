@@ -1,7 +1,3 @@
-/* New dog service no es necesario, dogs manejados
-desde DogService*/
-/*usar como plantilla para gatos, por ejemplo*/
-
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';

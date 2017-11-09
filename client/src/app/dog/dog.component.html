@@ -4,8 +4,8 @@
 <h5 *ngIf="this.user" >Hello, {{this.user.username}}</h5>
 <h3> Dogs list </h3>
 
-<button (click)="getListMyDogs()"> view my dogs </button>
-<button (click)="getListAllDogs()"> view all dogs </button>
+<button (click)="getListMyDogs()"> View my dogs </button>
+<button (click)="getListAllDogs()"> View all dogs </button>
 <br>
 <p class="newdog" [routerLink]="['../newDog']">Add a new Dog</p>
 

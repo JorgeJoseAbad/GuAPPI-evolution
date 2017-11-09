@@ -3,18 +3,20 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
+import { environment } from '../../environments/environment';
 //import { Observable } from 'rxjs/Observable';
 //import { NgForOf } from '@angular/common';
 
 @Injectable()
 export class DogService {
-  BASE_URL: string = 'http://localhost:3000';
+  BASE_URL: string = environment.apiUrl;
+  //BASE_URL: string = 'http://localhost:3000';
   options: Object = {withCredentials:true};
 
   constructor(private http: Http) {}
 
   handleError(e) {
-    console.error("Error en Dog");
+    console.error("Error in Dog");
     return Observable.throw(e.json().message);
   }
 
@@ -30,8 +32,8 @@ export class DogService {
       .catch(this.handleError);
   }
 
- //newDog copiado del newdog service (a extinguir) no es operativo
- //dado que la carga del nuevo perro se hace desde FileUploader
+
+ //load new dog from file uploader
   newDog(dog) {
     console.log(dog);
     return this.http.post(`${this.BASE_URL}/api/dog`, {dog},this.options)
@@ -57,7 +59,7 @@ export class DogService {
       .catch(this.handleError);
   }
 
-  //
+
   getDogsByOwnerID(id){
     return this.http.get(`${this.BASE_URL}/api/dog/user/${id}`)
       .map((res) => res.json())

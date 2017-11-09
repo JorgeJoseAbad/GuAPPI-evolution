@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DogService} from '../services/dog.service';
 import { SessionService} from '../services/session.service';
 import { KgartenService} from '../services/kgarten.service';
+import { environment } from '../../environments/environment';
 
 
 @Component({

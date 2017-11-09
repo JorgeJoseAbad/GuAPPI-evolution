@@ -102,12 +102,13 @@ adoptDog(id,adopt_id){
 }
 
 pulloutDog(id){
-
+if (window.confirm('Are you sure you want to take this dog out of kindergarten?')) {
   this.kgartenservice.delete(id)
     .subscribe((res)=>{
       console.log(res);
       //this.router.navigate(['']); no util
     })
+  }
 }
 
 

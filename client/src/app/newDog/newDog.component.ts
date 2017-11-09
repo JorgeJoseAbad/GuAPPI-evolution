@@ -8,6 +8,7 @@ import { MapsAPILoader,AgmCoreModule } from '@agm/core'
 //import { MapsAPILoader,AgmCoreModule } from 'angular2-google-maps/core';
 import { FileUploader } from "ng2-file-upload";
 import { SessionService} from '../services/session.service';
+import { environment } from '../../environments/environment';
 
 
 
@@ -21,7 +22,8 @@ export class NewDogComponent implements OnInit {
   @Input() any;
 
   uploader: FileUploader = new FileUploader({
-    url: `http://localhost:3000/api/dog/`
+    //url: `http://localhost:3000/api/dog/`
+    url: `${environment.apiUrl}/api/dog/`
 
   });
 
@@ -136,8 +138,7 @@ ngOnInit() {
 
 
 
-//var origin_input = document.getElementById('origin-input');
-//console.log(origin_input)
+
 addDog() {
 
     this.uploader.onBuildItemForm = (item, form) => {
