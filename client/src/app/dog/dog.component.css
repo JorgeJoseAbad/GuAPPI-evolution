@@ -4,7 +4,7 @@ h3{
 
 h5{
   color:ANTIQUEWHITE;
-  border-top: 2px solid red;
+
 }
 
 span{
@@ -24,10 +24,17 @@ span{
 
 .dogList1{
   width: 400px;
+  padding: 10px;
 }
 
 .dogList2{
-  margin-left: 20px;
+  margin-left: 10px;
+  border: 2px solid #f2cbcb;
+  border-radius: 2px;
+  margin-top:10px;
+  padding-left: 5px;
+  background-color: hsla(178, 62%, 21%, 0.36);
+  box-shadow: 4px 4px 4px 4px #f2cbcb;
 }
 
 .dogList2 p{

@@ -7,6 +7,7 @@ const cookieParser       = require('cookie-parser');
 const bodyParser         = require('body-parser');
 const expressLayouts     = require('express-ejs-layouts');
 const mongoose           = require('mongoose');
+mongoose.set('useCreateIndex', true);
 const passport           = require('passport');
 //const LocalStrategy      = require("passport-local").Strategy;
 const session            = require('express-session');
@@ -18,7 +19,7 @@ const users              = require('./routes/users');
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true });
 console.log("connecting to mongo: ");
 
 const app = express();
@@ -33,7 +34,7 @@ var corsOptions = {
         var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
         callback(null, originIsWhitelisted);
     },
-    credentials: true
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
