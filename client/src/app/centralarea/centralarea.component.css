@@ -1,19 +1,26 @@
 h1{
   text-align: center;
   color: green;
-  border-top: 2px solid red;
+  border-top: 1px solid red;
 }
 .lat-left{
   background-color: #ccffcc;
   background-image: url("../../assets/fondoperro.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 7px 7px 6px 3px black;
+
 }
 .lat-rigth{
   background-color: #ffccff;
   background-image: url("../../assets/fondoperro.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 7px 7px 6px 3px black;
 }
 
 .intro{
