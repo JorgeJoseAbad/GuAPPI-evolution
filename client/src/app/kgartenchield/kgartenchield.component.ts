@@ -28,7 +28,7 @@ export class KgartenchieldComponent implements OnInit,OnChanges{
 
   constructor(
     private dogservice: DogService,
-    private session:SessionService,
+    public session:SessionService,
     private kgartenservice: KgartenService,
     private router: Router
   ) { }
