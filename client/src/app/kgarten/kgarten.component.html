@@ -1,15 +1,17 @@
-<h2>
-  Dogs kgarten
-</h2>
-<h5>Here are the dogs sent to care</h5>
+<div id="kgarten">
+  <h2>
+    Dogs kgarten
+  </h2>
+  <h5>Here are the dogs sent to care</h5>
 
- <button (click)="updateKgarten()">Update Kgarten</button>
- <div class="note">{{message}}</div>
+   <button (click)="updateKgarten()">Update Kgarten</button>
+   <div class="note">{{message}}</div>
 
-<div class="list">
-  <div *ngFor="let pet of pets"  class="dogList">
-    <h5>
-          <app-kgartenchield [pet]="pet"></app-kgartenchield>
-    </h5>
+  <div class="list">
+    <div *ngFor="let pet of pets"  class="dogList">
+      <h5>
+            <app-kgartenchield [pet]="pet"></app-kgartenchield>
+      </h5>
+    </div>
   </div>
 </div>

@@ -12,7 +12,8 @@
   <button (click)="trazeRoute()">Show rute adoption</button>
 </div>
 
-<agm-map  id="map" [latitude]="lat" [longitude]="lng">
+<agm-map  id="map" [latitude]="lat" [longitude]="lng"
+>
 
   <div *ngFor="let dog of dogs" >
     <agm-marker [label]="A"
@@ -25,7 +26,8 @@
     <agm-marker [latitude]="logUser.latitude"
                 [longitude]="logUser.longitude"
                 [iconUrl]="userMarker.icon"
-                [openInfoWindow]=true >
+                [openInfoWindow]=true
+       >
     </agm-marker>
   </div>
 
@@ -46,7 +48,8 @@
       >
     </agm-circle>
 
-    <agm-polyline [geodesic]=true>
+    <agm-polyline [geodesic]=true
+    >
             <agm-polyline-point
                             [latitude]="originUser.lat"
                             [longitude]="originUser.lng"
@@ -58,7 +61,7 @@
               >
             </agm-polyline-point>
     </agm-polyline>
-</div>
+ </div>
 
 
 </agm-map>

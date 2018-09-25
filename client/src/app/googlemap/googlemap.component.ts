@@ -3,7 +3,7 @@ import { DogService } from '../services/dog.service';
 import { SessionService} from '../services/session.service';
 import { KgartenService} from '../services/kgarten.service';
 //import { MapsAPILoader,AgmCoreModule } from 'angular2-google-maps/core';
-import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
+//import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
 
 import { AgmMap, AgmMarker } from '@agm/core';
 import { MapsAPILoader,AgmCoreModule } from '@agm/core';
