@@ -58,6 +58,7 @@ export class KgartenchieldComponent implements OnInit,OnChanges{
 getOwnerName(id){
   this.session.get(id)
     .subscribe((owner)=>{
+      console.log(owner);
       console.log(owner.username);
       this.owner=owner.username;
 

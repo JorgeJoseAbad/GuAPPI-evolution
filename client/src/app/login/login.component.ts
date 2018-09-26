@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
      address: ''
    };
    error: string;
-   privateData: any = '';
+   privateData: any;
 
 
   constructor(private router: Router,private session: SessionService) { }

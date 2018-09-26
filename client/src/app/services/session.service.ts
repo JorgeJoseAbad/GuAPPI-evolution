@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-//import { Http,Response } from '@angular/http';
+import { Http,Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -24,7 +24,7 @@ export class SessionService {
   startLoginCompleted:boolean = false;
   options:Object = {withCredentials:false};
 
-  constructor(
+  constructor(private http:Http,
               private httpclient:HttpClient) {
     /*this.isLoggedIn()
         .subscribe( (user:User) =>{
@@ -114,10 +114,16 @@ export class SessionService {
 
     }
 
-    //Added to retrieve the user by Id
     get(id){
-      return this.httpclient.get(`${BASEURL}/api/user/${id}`)
-      .map(res=>res)
+      return this.httpclient.get<User>(`${BASEURL}/api/user/${id}`,{observe: 'response' })
+      .map(res=>res.body)
       .catch(this.handleError);
     }
+
+    //Added to retrieve the user by Id
+    /*get(id){
+      return this.http.get(`${BASEURL}/api/user/${id}`)
+      .map(res=>res.json())
+      .catch(this.handleError);
+    }*/
 }
