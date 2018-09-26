@@ -1,7 +1,17 @@
-h1{
+#centralarea{
+  background-color:  #b1eef3;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 20px;
+  padding-bottom: 20px;
+  box-shadow: 7px 7px 6px 3px black;
+}
+
+#centralarea h1{
   text-align: center;
   color: green;
-  border-top: 1px solid red;
+
 }
 .lat-left{
   background-color: #ccffcc;
