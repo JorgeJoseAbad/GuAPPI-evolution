@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http,Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -24,19 +24,13 @@ export class SessionService {
   startLoginCompleted:boolean = false;
   options:Object = {withCredentials:false};
 
-  constructor(private http:Http,
-              private httpclient:HttpClient) {
-    /*this.isLoggedIn()
-        .subscribe( (user:User) =>{
-        console.log(`Welcome again user ${user.username}`)
-        this.user = user;
-        this.startLoginCompleted = true;
-      }, e => this.startLoginCompleted = true);*/
+  constructor(private httpclient:HttpClient) {
+
     }
 
     handleError(e) {
       console.error("en handleError");
-      return Observable.throw(e.json().message);
+      return Observable.throw(e.message);
     }
 
     signup(user) {
@@ -45,11 +39,6 @@ export class SessionService {
         .catch(this.handleError);
     }
 
-    /*signup(user) {
-      return this.http.post(`${BASEURL}/signup`, user)
-        .map(res => res.json())
-        .catch(this.handleError);
-    }*/
 
  /*login and logout with httpclient*/
   login(user) {
@@ -60,51 +49,31 @@ export class SessionService {
     .catch(this.handleError);
   }
 
-  logout() {
-      return this.httpclient.post(`${BASEURL}/logout`,{}, this.options)
+  logout():Observable<any> {
+      return this.httpclient.post(`${BASEURL}/logout`,{}, {withCredentials:false,observe: 'response' })
       .map(res => {
-                    console.log(res);
+                    console.log(res.body);
                     this.user=null; //destroy this session user
                   })
       .catch(this.handleError);
     }
 
-  /*
-  Login with http
-    login(user) {
-      return this.http.post(`${BASEURL}/login`, user ,this.options)
-      .map(res =>
-        //console.log(typeof(res));
-        //console.log(res);
-        this.user=res.json()
-        //console.log(this.user);
-
-      )
-      .catch(this.handleError);
-    }
-*/
-/*
-    logout() {
-      return this.http.post(`${BASEURL}/logout`,{},this.options )
-        .map(res => {
-                      res.json();
-                      console.log(res.json());
-                      this.user=null; //destroy this session user
-                    })
-        .catch(this.handleError);
-    }
-*/
-
-    isLoggedIn():Observable<User>{
-      return this.http.get(`${BASEURL}/loggedin`, this.options)
+    isLoggedIn():Observable<any>{
+      return this.httpclient.get(`${BASEURL}/loggedin`,{ withCredentials:true,observe: 'response' })
         .map(res => {
           console.log("this user in loggedin");
-          console.log(this.user);
-          this.user = res.json();
-          return this.user;
+          console.log(res.body);
+          return res.body;
         })
         .catch(this.handleError);
     }
+
+    /*this.isLoggedIn()
+        .subscribe( (user:User) =>{
+        console.log(`Welcome again user ${user.username}`)
+        this.user = user;
+        this.startLoginCompleted = true;
+      }, e => this.startLoginCompleted = true);*/
 
 
     getPrivateData() {
@@ -120,10 +89,4 @@ export class SessionService {
       .catch(this.handleError);
     }
 
-    //Added to retrieve the user by Id
-    /*get(id){
-      return this.http.get(`${BASEURL}/api/user/${id}`)
-      .map(res=>res.json())
-      .catch(this.handleError);
-    }*/
 }

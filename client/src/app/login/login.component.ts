@@ -30,8 +30,14 @@ export class LoginComponent implements OnInit {
 
     this.session.isLoggedIn()
       .subscribe(
-        (user) => this.successCb(user),
-        (err) => this.errorCb(err)
+        (user) => {
+                    console.log("PRUEBA eninit login: ",user);
+                    this.successCb(user)
+                  },
+        (err) => {
+                   console.log("PRUEBA en init login: ",err);
+                   this.errorCb(err)
+                 }
       );
 
   }

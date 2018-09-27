@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
+import { HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
@@ -12,38 +13,46 @@ export class KgartenService {
   //BASE_URL: string = 'http://localhost:3000';
   BASE_URL: string =environment.apiUrl;
   routePair;
-  constructor(private http: Http) { }
 
+  constructor(private httpclient: HttpClient) { }
+
+   handleError(e) {
+     console.error("Error in Kgarten");
+     return Observable.throw(e.message);
+   }
 
     getList() {
       console.log("en getlist kgarten service");
-      return this.http.get(`${this.BASE_URL}/api/kgarten`)
-        .map((res) => res.json());
+      return this.httpclient.get(`${this.BASE_URL}/api/kgarten`,{observe: 'response'})
+        .map((res) => res.body)
+        .catch(this.handleError);
     }
 
     get(id) {
-      return this.http.get(`${this.BASE_URL}/api/kgarten/${id}`)
-        .map((res) => res.json());
+      return this.httpclient.get(`${this.BASE_URL}/api/kgarten/${id}`,{observe: 'response'})
+        .map((res) => res.body)
+        .catch(this.handleError);
     }
 
     add(dogKgarten) {
       console.log(dogKgarten);
-      return this.http.post(`${this.BASE_URL}/api/kgarten`,dogKgarten)
-        .map((res)=> res.json());
+      return this.httpclient.post(`${this.BASE_URL}/api/kgarten`,dogKgarten,{observe: 'response'})
+        .map((res)=> res.body)
+        .catch(this.handleError);
     }
 
     edit(dogKgarten,updatedPet) {
       console.log(dogKgarten,updatedPet);
-      return this.http.put(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet)
-        .map((res) => res.json());
+      return this.httpclient.put(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet,{observe: 'response'})
+        .map((res) => res.body)
+        .catch(this.handleError);
     }
 
     delete(id) {
       console.log(id);
-      return this.http.delete(`${this.BASE_URL}/api/kgarten/${id}`)
-        .map((res) => res.json());
-
-        //.catch(this.handleError);
+      return this.httpclient.delete(`${this.BASE_URL}/api/kgarten/${id}`,{observe: 'response'})
+        .map((res) => res.body)
+        .catch(this.handleError);
     }
 
    /*receive the pet adopted from kgartenchield component*/
