@@ -19,7 +19,10 @@ const users              = require('./routes/users');
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+ });
 console.log("connecting to mongo: ");
 
 const app = express();

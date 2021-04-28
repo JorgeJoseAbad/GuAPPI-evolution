@@ -59,7 +59,7 @@ export class SessionService {
     }
 
     isLoggedIn():Observable<any>{
-      return this.httpclient.get(`${BASEURL}/loggedin`,{ withCredentials:true,observe: 'response' })
+      return this.httpclient.post(`${BASEURL}/loggedin`,this.user,{ withCredentials:true,observe: 'response' })
         .map(res => {
           console.log("this user in loggedin");
           console.log(res.body);
@@ -77,7 +77,7 @@ export class SessionService {
 
 
     getPrivateData() {
-      return this.httpclient.get(`${BASEURL}/private`,{withCredentials:true})
+      return this.httpclient.post(`${BASEURL}/private`,this.user,{withCredentials:true})
         .map(res => {return res;})
         .catch(this.handleError);
 
