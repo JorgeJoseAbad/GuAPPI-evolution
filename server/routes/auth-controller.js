@@ -109,6 +109,7 @@ authController.post("/logout",function(req, res, next) {
 
 authController.get("/loggedin", function(req, res, next) {
   console.log("authcontroller.get /loggedin");
+  debugger;
   if(req.isAuthenticated()) {
     return res.status(200).json(req.user);
   }
@@ -117,16 +118,25 @@ authController.get("/loggedin", function(req, res, next) {
 });
 
 
+/* ---- TEST ---- */
+authController.get('/test', (req, res) => {
+  console.log("REQ:SESSIONSTORE: ",req.sessionStore);
+  console.log("REQ.SESSIONID: ",req.sessionID);
+  console.log("REQ.SESSION: ",req.session);
+  console.log("REQ USER; ",req.user);
+  res.status(200).end(req.isAuthenticated() ? 'logged in': 'logged out');
+});
+/* ---- TEST ----*/
+
+
 authController.get("/private", (req, res) => {
   console.log("estoy en authcontroller private");
-  console.log(req.session);
-
-  //esto parece que no funciona porque se pierde req.session.passport.user;
-  //y esto daría error;
-  //console.log("req.session.passport.user: "+req.session.passport.user);
+  console.log("------Req user in authcontoller: ----",req.user);
+  console.log("Req Session: ",req.session);
 
   if(req.isAuthenticated()) {
-    return res.json({ message: 'This is a private message' });
+    //return res.json({ message: 'This is a private message' });
+    return res.json({email: req.user.email});
   }
  else {
    console.log("req.no esta autenticado");

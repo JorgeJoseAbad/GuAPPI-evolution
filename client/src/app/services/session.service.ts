@@ -42,7 +42,7 @@ export class SessionService {
 
  /*login and logout with httpclient*/
   login(user) {
-    return this.httpclient.post<User>(`${BASEURL}/login`, user ,{withCredentials:false,observe: 'response' })
+    return this.httpclient.post<User>(`${BASEURL}/login`, user ,{withCredentials:true,observe: 'response' })
     .map(res =>
       this.user=res.body
     )
@@ -50,7 +50,7 @@ export class SessionService {
   }
 
   logout():Observable<any> {
-      return this.httpclient.post(`${BASEURL}/logout`,{}, {withCredentials:false,observe: 'response' })
+      return this.httpclient.post(`${BASEURL}/logout`,{}, {withCredentials:true,observe: 'response' })
       .map(res => {
                     console.log(res.body);
                     this.user=null; //destroy this session user
@@ -77,7 +77,7 @@ export class SessionService {
 
 
     getPrivateData() {
-      return this.httpclient.post(`${BASEURL}/private`,this.user,{withCredentials:true})
+      return this.httpclient.get(`${BASEURL}/private`,{withCredentials:true})
         .map(res => {return res;})
         .catch(this.handleError);
 

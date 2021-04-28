@@ -27,8 +27,6 @@ console.log("connecting to mongo: ");
 
 const app = express();
 
-
-
 var whitelist = [
     'http://localhost:4200',
 ];
@@ -58,17 +56,15 @@ app.use(session({
   })
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components/')));
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 
 
 require('./routes/index')(app);

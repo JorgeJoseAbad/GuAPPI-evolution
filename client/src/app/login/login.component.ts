@@ -57,8 +57,12 @@ export class LoginComponent implements OnInit {
    logout() {
      this.session.logout()
        .subscribe(
-         () => this.successCb(null),
+         () => {
+           this.privateData = undefined; //borrar los datos privados
+           this.successCb(null)
+         },
          (err) => this.errorCb(err)
+
        )
        console.log("in logout login component ts");
        console.log(this.user);
