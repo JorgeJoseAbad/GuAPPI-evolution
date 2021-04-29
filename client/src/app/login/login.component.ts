@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
      this.session
        .login(this.formInfo)
        .subscribe(
-         (user) => {this.successCb(user);
-                    console.log(user)},
+         (res) => {this.successCb(res.body);
+                    console.log(res)},
          (err) => this.errorCb(err)
        );
    }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
@@ -9,14 +9,18 @@ import { environment } from '../../environments/environment';
 const BASEURL = environment.apiUrl;
 
 export interface User{
-  _id:string,
-  username:string,
-  password:string,
-  email:string,
   address: string,
-  longitude: string,
-  latitude: string
+  created_at: string,
+  email: string,
+  imgUrl: string,
+  latitude: number,
+  longitude: number,
+  password: string,
+  updated_at: string,
+  username: string,
+  _id: string
 }
+
 
 @Injectable()
 export class SessionService {
@@ -41,11 +45,12 @@ export class SessionService {
 
 
  /*login and logout with httpclient*/
-  login(user) {
-    return this.httpclient.post<User>(`${BASEURL}/login`, user ,{withCredentials:true,observe: 'response' })
-    .map(res =>
-      this.user=res.body
-    )
+  login(userlogin): Observable<HttpResponse<User>>{
+    return this.httpclient.post<User>(`${BASEURL}/login`, userlogin ,{
+      withCredentials:true,
+      observe: 'response'
+    })
+    .map(res => {this.user = res.body; return res})
     .catch(this.handleError);
   }
 
@@ -58,8 +63,11 @@ export class SessionService {
       .catch(this.handleError);
     }
 
-    isLoggedIn():Observable<any>{
-      return this.httpclient.get(`${BASEURL}/loggedin`,{ withCredentials:true,observe: 'response' })
+    isLoggedIn(): Observable<HttpResponse<User>>{
+      return this.httpclient.get<HttpResponse<User>>(`${BASEURL}/loggedin`,{
+        withCredentials:true,
+        observe: 'response'
+      })
         .map(res => {
           console.log("this user in loggedin");
           console.log(res.body);
@@ -76,9 +84,12 @@ export class SessionService {
       }, e => this.startLoginCompleted = true);*/
 
 
-    getPrivateData() {
-      return this.httpclient.get(`${BASEURL}/private`,{withCredentials:true})
-        .map(res => {return res;})
+    getPrivateData(): Observable<HttpResponse<User>> {
+      return this.httpclient.get<any>(`${BASEURL}/private`,{
+        withCredentials:true,
+        observe: 'response'
+      })
+        .map(res => {return res.body;})
         .catch(this.handleError);
 
     }
