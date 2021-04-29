@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SessionService } from '../services/session.service';
 
 
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit {
    privateData: Object = undefined;
 
 
-  constructor(private router: Router,private session: SessionService) { }
+  constructor(private session: SessionService) { }
 
   ngOnInit() {
     this.session.isLoggedIn()

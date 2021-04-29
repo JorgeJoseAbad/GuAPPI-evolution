@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SessionService } from '../services/session.service';
-
 import { NgModel } from '@angular/forms';
 import { FormControl } from "@angular/forms";
 import { ElementRef, NgZone, ViewChild } from '@angular/core';
@@ -33,7 +31,6 @@ export class SignupComponent implements OnInit {
      public searchElementRef: ElementRef;
 
   constructor(
-    private router: Router,
     private session: SessionService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
