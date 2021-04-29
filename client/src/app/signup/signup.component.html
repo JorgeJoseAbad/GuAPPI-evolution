@@ -31,14 +31,12 @@
           <label>Location</label>
           <input placeholder="search for location"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
         </div>
-        <br>
 
         <div class="buttons-area">
           <button (click)="signup()"> signup </button>
-
         </div>
-
       </form>
+
       <div *ngIf="user" class="text-general">
         <h2> You are now logged in as {{ user.username }}!! </h2>
         <p> Here's the user object </p>
