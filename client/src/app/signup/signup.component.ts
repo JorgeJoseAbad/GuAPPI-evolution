@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
          (user) => this.successCb(user)
        );*/
 
-  this.searchControl = new FormControl();
+     this.searchControl = new FormControl();
 
        //load Places Autocomplete
        this.mapsAPILoader.load().then(() => {
@@ -61,13 +61,9 @@ export class SignupComponent implements OnInit {
              if (place.geometry === undefined || place.geometry === null) {
                return;
              }
-
              //set latitude, longitude and zoom
              this.formInfo.latitude = place.geometry.location.lat();
              this.formInfo.longitude = place.geometry.location.lng();
-
-             console.log(this.formInfo.latitude);
-             console.log(this.formInfo.longitude);
 
            });
          });
@@ -87,7 +83,10 @@ export class SignupComponent implements OnInit {
    logout() {
      this.session.logout()
        .subscribe(
-         () => this.successCb(null),
+         () => {
+           this.privateData = undefined;
+           this.successCb(null)
+         },
          (err) => this.errorCb(err)
        );
    }
