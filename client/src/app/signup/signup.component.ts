@@ -3,8 +3,7 @@ import { SessionService } from '../services/session.service';
 import { NgModel } from '@angular/forms';
 import { FormControl } from "@angular/forms";
 import { ElementRef, NgZone, ViewChild } from '@angular/core';
-//import { MapsAPILoader,AgmCoreModule } from 'angular2-google-maps/core';
-import { MapsAPILoader,AgmCoreModule } from '@agm/core';
+import { MapsAPILoader} from '@agm/core';
 
 @Component({
   selector: 'app-signup',
