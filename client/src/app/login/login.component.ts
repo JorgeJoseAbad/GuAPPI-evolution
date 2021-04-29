@@ -11,40 +11,25 @@ import { SessionService } from '../services/session.service';
 })
 export class LoginComponent implements OnInit {
   user: any;
-   formInfo = {
+   formInfo: Object = {
      username: '',
-     password: '',
-     email: '',
-     address: ''
+     password: ''
    };
    error: string;
-   privateData: any;
+   privateData: Object = undefined;
 
 
   constructor(private router: Router,private session: SessionService) { }
 
-
   ngOnInit() {
-      console.log("on init");
-
-
     this.session.isLoggedIn()
       .subscribe(
-        (user) => {
-                    console.log("PRUEBA eninit login: ",user);
-                    this.successCb(user)
-                  },
-        (err) => {
-                   console.log("PRUEBA en init login: ",err);
-                   this.errorCb(err)
-                 }
+        (user) => { this.successCb(user) },
+        (err) => { this.errorCb(err) }
       );
-
   }
 
   login() {
-     console.log(this.formInfo);
-     console.log(this.formInfo.username);
      this.session
        .login(this.formInfo)
        .subscribe(
@@ -62,22 +47,15 @@ export class LoginComponent implements OnInit {
            this.successCb(null)
          },
          (err) => this.errorCb(err)
-
        )
-       console.log("in logout login component ts");
-       console.log(this.user);
    }
 
    getPrivateData() {
      this.session.getPrivateData()
        .subscribe(
-         (data) => this.privateData = data,
+         (data) => {this.privateData = data},
          (err) => this.error = err
        );
-       console.log("this.privatedata o err: ")
-       console.log(this.privateData);
-       console.log(this.error);
-
    }
 
    errorCb(err) {

@@ -136,7 +136,7 @@ authController.get("/private", (req, res) => {
 
   if(req.isAuthenticated()) {
     //return res.json({ message: 'This is a private message' });
-    return res.json({email: req.user.email});
+    return res.json(req.user);
   }
  else {
    console.log("req.no esta autenticado");

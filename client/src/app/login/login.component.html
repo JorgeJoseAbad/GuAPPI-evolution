@@ -1,11 +1,12 @@
-<h3>
-  Login here.
-</h3>
-<div class="container">
+
+<div class="container login-area">
+  <h3>
+    Login here.
+  </h3>
   <div class="row">
     <div class="col-sm-12 centered-form">
 
-      <form action="/signup" method="post">
+      <form *ngIf="!user" action="/signup" method="post">
 
         <div class="form-group">
           <label> Username </label>
@@ -18,20 +19,19 @@
         </div>
         <div class="buttons-area">
           <button (click)="login()"> login </button>
-          <button (click)="logout()"> logout </button>
-          <button (click)="getPrivateData()">private data </button>
+
         </div>
       </form>
       <div *ngIf="user" class="text-general">
-        <h4> You are now logged in as {{ user.username }} </h4>
-        <!-- <h4> your id is {{user._id}}</h4>
-        <p> Here's the user object </p>
-        <pre> {{ user | json }} </pre>
-        commented code, but valid code-->
-
-        <p *ngIf="privateData" class="text-general"> Here's some data fetched from a protected API </p>
-        <pre> {{ privateData | json}} </pre>
-
+        <h4> Hello! {{ user.username }} </h4>
+        <button (click)="logout()"> logout </button>
+        <button (click)="getPrivateData()">private data </button>
+      </div>
+      <div *ngIf="privateData" class="text-general">
+        <h4> More Data: </h4>
+        <pre>Email: {{ privateData.email }} </pre>
+        <pre>Address: {{ privateData.address }} </pre>
+        <img src="{{privateData.imgUrl}}" alt="">
       </div>
         <p class="error"> {{ error }} </p>
     </div>
