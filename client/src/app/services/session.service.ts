@@ -30,7 +30,7 @@ export class SessionService {
 
     handleError(e) {
       console.error("en handleError");
-      return Observable.throw("Error Message: "+e.message);
+      return Observable.throw("Error Message: " + e.error.message);
     }
 
     signup(user) {
