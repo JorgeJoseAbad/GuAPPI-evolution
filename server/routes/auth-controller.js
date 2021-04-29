@@ -109,11 +109,9 @@ authController.post("/logout",function(req, res, next) {
 
 authController.get("/loggedin", function(req, res, next) {
   console.log("authcontroller.get /loggedin");
-  debugger;
   if(req.isAuthenticated()) {
     return res.status(200).json(req.user);
   }
-
   return res.status(403).json({ message: 'Unauthorized' });
 });
 

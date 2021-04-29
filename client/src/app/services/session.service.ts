@@ -30,7 +30,7 @@ export class SessionService {
 
     handleError(e) {
       console.error("en handleError");
-      return Observable.throw(e.message);
+      return Observable.throw("Error Message: "+e.message);
     }
 
     signup(user) {
@@ -59,7 +59,7 @@ export class SessionService {
     }
 
     isLoggedIn():Observable<any>{
-      return this.httpclient.post(`${BASEURL}/loggedin`,this.user,{ withCredentials:true,observe: 'response' })
+      return this.httpclient.get(`${BASEURL}/loggedin`,{ withCredentials:true,observe: 'response' })
         .map(res => {
           console.log("this user in loggedin");
           console.log(res.body);
