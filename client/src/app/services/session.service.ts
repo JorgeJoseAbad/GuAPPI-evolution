@@ -28,9 +28,7 @@ export class SessionService {
   startLoginCompleted:boolean = false;
   options:Object = {withCredentials:false};
 
-  constructor(private httpclient:HttpClient) {
-
-    }
+  constructor(private httpclient:HttpClient) {}
 
     handleError(e) {
       console.error("en handleError");
@@ -55,24 +53,20 @@ export class SessionService {
   }
 
   logout():Observable<any> {
-      return this.httpclient.post(`${BASEURL}/logout`,{}, {withCredentials:true,observe: 'response' })
+      return this.httpclient.post<any>(`${BASEURL}/logout`,{}, {withCredentials:true,observe: 'response' })
       .map(res => {
-                    console.log(res.body);
-                    this.user=null; //destroy this session user
+                    this.user = null; //destroy this session user
+                    return res;
                   })
       .catch(this.handleError);
     }
 
     isLoggedIn(): Observable<HttpResponse<User>>{
-      return this.httpclient.get<HttpResponse<User>>(`${BASEURL}/loggedin`,{
+      return this.httpclient.get<User>(`${BASEURL}/loggedin`,{
         withCredentials:true,
         observe: 'response'
       })
-        .map(res => {
-          console.log("this user in loggedin");
-          console.log(res.body);
-          return res.body;
-        })
+        .map(res => {return res;})
         .catch(this.handleError);
     }
 
@@ -85,11 +79,11 @@ export class SessionService {
 
 
     getPrivateData(): Observable<HttpResponse<User>> {
-      return this.httpclient.get<any>(`${BASEURL}/private`,{
+      return this.httpclient.get<User>(`${BASEURL}/private`,{
         withCredentials:true,
         observe: 'response'
       })
-        .map(res => {return res.body;})
+        .map(res => {return res;})
         .catch(this.handleError);
 
     }

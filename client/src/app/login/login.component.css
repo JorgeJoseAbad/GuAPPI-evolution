@@ -48,4 +48,10 @@ h3{
 
 .error{
   color: red;
+  font-size: 1.2rem;
+}
+
+.logout-message{
+  color: antiquewhite;
+  font-size: 1.2rem;
 }

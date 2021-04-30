@@ -14,8 +14,9 @@ export class LoginComponent implements OnInit {
      username: '',
      password: ''
    };
-   error: string;
+   error: string = undefined;
    privateData: Object = undefined;
+   logoutMessage : string = undefined;
 
 
   constructor(private session: SessionService) { }
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.session.isLoggedIn()
       .subscribe(
-        (user) => { this.successCb(user) },
+        (res) => { this.successCb(res.body) },
         (err) => { this.errorCb(err) }
       );
   }
@@ -32,8 +33,10 @@ export class LoginComponent implements OnInit {
      this.session
        .login(this.formInfo)
        .subscribe(
-         (res) => {this.successCb(res.body);
-                    console.log(res)},
+         (res) => {
+                    this.logoutMessage = undefined;
+                    this.successCb(res.body);
+          },
          (err) => this.errorCb(err)
        );
    }
@@ -41,9 +44,10 @@ export class LoginComponent implements OnInit {
    logout() {
      this.session.logout()
        .subscribe(
-         () => {
-           this.privateData = undefined; //borrar los datos privados
-           this.successCb(null)
+         (res) => {
+                   this.privateData = undefined; //borrar los datos privados
+                   this.logoutMessage = "User logout with " + res.body.message;
+                   this.successCb(null)
          },
          (err) => this.errorCb(err)
        )
@@ -52,7 +56,7 @@ export class LoginComponent implements OnInit {
    getPrivateData() {
      this.session.getPrivateData()
        .subscribe(
-         (data) => {this.privateData = data},
+         (data) => {this.privateData = data.body},
          (err) => this.error = err
        );
    }
