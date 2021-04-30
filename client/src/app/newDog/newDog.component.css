@@ -25,7 +25,6 @@ form{
   align-content:flex-end;
 }
 
-
 img{
   width: 100px;
   height: auto;
@@ -36,6 +35,17 @@ img{
   font-weight:inherit;
   color: #f1f135;
   text-align: center;
-
   background-color: rgba(110, 110, 50, 0.5)
+}
+
+.dog-info{
+  color: antiquewhite;
+  font-size: 1.2rem;
+  width: inherit;
+}
+
+.error{
+  color: darkred;
+  font-size: 1.2rem;
+  width: inherit;
 }

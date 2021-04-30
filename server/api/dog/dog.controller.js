@@ -5,14 +5,12 @@ const fs         = require('fs');
 
 const dogModel = require('./dog.model');
 
-
 console.log("he llegado a controlador de chuhos");
 
-
 exports.createDog = function(req, res) {
-	console.log("req.body:------------");
+	console.log("req.body:------------ en create Dogs");
 	console.log(req.body);
-	console.log("req.file.filename:----------");
+	console.log("req.file.filename:---------- en create Dogs");
 	console.log(req.file.filename);
 
 	var item = new dogModel({
@@ -29,22 +27,26 @@ exports.createDog = function(req, res) {
 	console.log("item:");
 	console.log(item);
 	Q.nfcall(item.save.bind(item))
-        .then(function () {
+      .then(function () {
 					console.log("en Q.nfcall");
-						console.log(item);
-            res.json({
-                _id: item._id,
-								user_id: item.user_id,
-                dogName: item.dogName,
-                breed: item.breed,
-                age: item.age,
-								imgUrl: item.imgUrl,
-								latitude: item.latitude,
-								longitude: item.longitude,
-                created_at:item.created_at,
-                updated_at: item.updated_at
-            });
-        });
+					console.log(item);
+          res.json({
+              _id: item._id,
+							user_id: item.user_id,
+              dogName: item.dogName,
+              breed: item.breed,
+              age: item.age,
+							imgUrl: item.imgUrl,
+							latitude: item.latitude,
+							longitude: item.longitude,
+              created_at:item.created_at,
+              updated_at: item.updated_at
+          });
+      })
+			.catch(function(e){
+				console.log("error en BBDD---->",e);
+				res.json({message:"Error in Dog saving on BBDD: " + e.message});
+			});
 };
 
 
@@ -107,8 +109,8 @@ exports.readDog=function(req,res,next){
 		            if (err) throw err;
 
 		          }
-		          catch (err){
-		            console.log(err);
+		          catch (e){
+		            console.log(e);
 
 		          }
 		          finally {

@@ -29,63 +29,52 @@ export class NewDogComponent implements OnInit {
 
   user: any;
   username: string;
-
-  breeds = [
-    "Alsacian",
-    "setter",
-    "spaniel",
-    "chiguagua",
-    "podenco"
-  ];
-
-
+  breeds = ["Alsacian","setter","spaniel","chiguagua","podenco","galgo","mastin","alano","leon (da error BBDD)"];
    newDog = {
       user_id: '',
-      dogName: 'Place dog name',
+      dogName: '',
       breed: this.breeds[0],
       age: '',
-      description: 'Place description',
+      description: '',
       imgUrl: '',
       latitude: 6,
       longitude: 6
     };
-
    error: string;
-
+   uploaderSuccess: Boolean = false;
+   uploaderError: Boolean = false;
    feedback: string;
 
-     public latitude: number;
-     public longitude: number;
-     public searchControl: FormControl;
-     public zoom: number;
+   public latitude: number;
+   public longitude: number;
+   public searchControl: FormControl;
+   public zoom: number;
 
-     @ViewChild("search")
-       public searchElementRef: ElementRef;
+   @ViewChild("search")
+     public searchElementRef: ElementRef;
 
     constructor(
       private session: SessionService,
       private mapsAPILoader: MapsAPILoader,
       private ngZone: NgZone,
       private router: Router,
-
     ) {}
 
 ngOnInit() {
 
-
-
     this.user=this.session.user;
+    this.uploaderSuccess = false;
+    this.uploaderError = false;
     console.log(this.user);
 
     this.uploader.onSuccessItem = (item, response) => {
-            this.feedback = JSON.parse(response).message;
+            this.uploaderSuccess = true;
+            this.newDog = JSON.parse(response);
           };
-
     this.uploader.onErrorItem = (item, response, status, headers) => {
-      this.feedback = JSON.parse(response).message;
-    };
-
-
+            this.uploaderError = true;
+            this.error = JSON.parse(response).message;
+          };
 
     this.zoom = 4;
     this.latitude = 39.8282;
@@ -137,12 +126,9 @@ ngOnInit() {
   }
 
 
-
-
 addDog() {
 
     this.uploader.onBuildItemForm = (item, form) => {
-
         form.append('user_id',this.session.user._id);
         form.append('dogName', this.newDog.dogName);
         form.append('breed', this.newDog.breed);
@@ -150,16 +136,16 @@ addDog() {
         form.append('description', this.newDog.description);
         form.append('latitude', this.latitude);
         form.append('longitude', this.longitude);
-        console.log(form);
+        console.log("form in this.uploader.onBulidItemForm ",form);
       };
+    this.uploader.uploadAll();
 
-      this.uploader.uploadAll();
 
     //this.formInfo.latitude=this.latitude;
     //this.formInfo.longitude=this.longitude;
     //this.uploader.uploadAll();
 
-    console.log(this.newDog);
+    console.log(this.uploader);
 
     /*this.session.newDog(this.newDog)
       .subscribe(

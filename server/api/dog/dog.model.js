@@ -2,13 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const BREED = [
-  "Alsacian",
-  "setter",
-  "spaniel",
-  "chiguagua",
-  "podenco"
-];
+const BREED = ["Alsacian","setter","spaniel","chiguagua","podenco","galgo","mastin","alano"];
 
 const dogSchema = new mongoose.Schema({
   user_id: {

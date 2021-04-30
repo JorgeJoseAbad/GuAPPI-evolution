@@ -33,13 +33,14 @@ export class DogService {
   }
 
 
- //load new dog from file uploader
+ /*No use: load new dog from file uploader*/
+ /*
   newDog(dog) {
     console.log(dog);
     return this.httpclient.post(`${this.BASE_URL}/api/dog`, {dog},{withCredentials:true,observe: 'response'})
       .map(res => res.body)
       .catch(this.handleError);
-  }
+  }*/
 
   add(dog) {
     return this.httpclient.post(`${this.BASE_URL}/api/dog`,dog,{observe: 'response'})
