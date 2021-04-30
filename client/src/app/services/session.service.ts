@@ -35,9 +35,12 @@ export class SessionService {
       return Observable.throw("Error Message: " + e.error.message);
     }
 
-    signup(user) {
-      return this.httpclient.post(`${BASEURL}/signup`, user)
-        .map(res => res)
+    signup(usersignup): Observable<HttpResponse<User>>{
+      return this.httpclient.post<User>(`${BASEURL}/signup`, usersignup,{
+        withCredentials:true,
+        observe: 'response'
+      })
+        .map(res => {this.user = res.body; return res})
         .catch(this.handleError);
     }
 

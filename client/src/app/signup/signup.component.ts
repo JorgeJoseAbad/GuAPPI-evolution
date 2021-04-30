@@ -4,6 +4,7 @@ import { NgModel } from '@angular/forms';
 import { FormControl } from "@angular/forms";
 import { ElementRef, NgZone, ViewChild } from '@angular/core';
 import { MapsAPILoader} from '@agm/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -33,6 +34,7 @@ export class SignupComponent implements OnInit {
     private session: SessionService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -71,7 +73,7 @@ export class SignupComponent implements OnInit {
      console.log(this.formInfo);
      this.session.signup(this.formInfo)
        .subscribe(
-         (user) => this.successCb(user),
+         (res) => this.successCb(res.body),
          (err) => this.errorCb(err)
        );
    }
@@ -81,7 +83,8 @@ export class SignupComponent implements OnInit {
        .subscribe(
          () => {
            this.privateData = undefined;
-           this.successCb(null)
+           this.successCb(null);
+           this.router.navigate(['/login/']); //nuevo, para ir a login
          },
          (err) => this.errorCb(err)
        );
@@ -90,7 +93,7 @@ export class SignupComponent implements OnInit {
    getPrivateData() {
      this.session.getPrivateData()
        .subscribe(
-         (data) => this.privateData = data,
+         (data) => this.privateData = data.body,
          (err) => this.error = err
        );
    }
