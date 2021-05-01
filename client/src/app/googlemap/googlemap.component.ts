@@ -133,7 +133,7 @@ export class GooglemapComponent implements OnInit {
   mapLogedUser(){
 
     this.session.get(this.session.user._id).subscribe((logUser)=> {
-          this.logUser = logUser;
+          this.logUser = logUser.body;
           console.log(this.logUser);
           this.userCoord.lat=+this.logUser.latitude;
           this.userCoord.lng=+this.logUser.longitude;

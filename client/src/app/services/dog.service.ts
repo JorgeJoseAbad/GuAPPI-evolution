@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient,HttpResponse} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
@@ -20,15 +20,15 @@ export class DogService {
     return Observable.throw(e.message);
   }
 
-  getList():Observable<any> {
-    return this.httpclient.get(`${this.BASE_URL}/api/dog`,{observe: 'response' })
-      .map((res) => res.body)
+  getList():Observable<HttpResponse<any>> {
+    return this.httpclient.get<any>(`${this.BASE_URL}/api/dog`,{observe: 'response' })
+      .map((res) => res)
       .catch(this.handleError);
   }
 
-  get(id):Observable<any> {
-    return this.httpclient.get(`${this.BASE_URL}/api/dog/${id}`,{observe: 'response'} )
-      .map((res) => res.body)
+  get(id):Observable<HttpResponse<any>> {
+    return this.httpclient.get<any>(`${this.BASE_URL}/api/dog/${id}`,{observe: 'response'} )
+      .map((res) => res)
       .catch(this.handleError);
   }
 
