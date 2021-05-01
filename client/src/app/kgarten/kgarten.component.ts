@@ -25,9 +25,10 @@ export class KgartenComponent implements OnInit {
 
   ngOnInit() {
     this.petgarden.getList()
-    .subscribe((pets) => {
-      this.pets = pets;
-    });
+    .subscribe(
+      (response) => this.pets = response.body,
+      (err) => this.message= err
+    );
   }
 
 updateKgarten(){
@@ -35,10 +36,10 @@ updateKgarten(){
     console.log(this.session.user);
     this.message="Updated by you, "+this.session.user.username;
     this.petgarden.getList()
-    .subscribe((pets) => {
-      this.pets = pets;
-      console.log(this.pets);
-    });
+    .subscribe(
+      (response) => this.pets = response.body,
+      (err) => this.message = err
+    );
   } else this.message="You must be logged to update"
 }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient,HttpResponse} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
@@ -21,10 +21,10 @@ export class KgartenService {
      return Observable.throw(e.message);
    }
 
-    getList() {
+    getList(): Observable<HttpResponse<any>> {
       console.log("en getlist kgarten service");
-      return this.httpclient.get(`${this.BASE_URL}/api/kgarten`,{observe: 'response'})
-        .map((res) => res.body)
+      return this.httpclient.get<any>(`${this.BASE_URL}/api/kgarten`,{observe: 'response'})
+        .map((res) => res)
         .catch(this.handleError);
     }
 
@@ -41,9 +41,9 @@ export class KgartenService {
         .catch(this.handleError);
     }
 
-    edit(dogKgarten,updatedPet) {
+    edit(dogKgarten,updatedPet): Observable<HttpResponse<any>> {
       console.log(dogKgarten,updatedPet);
-      return this.httpclient.put(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet,{observe: 'response'})
+      return this.httpclient.put<any>(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet,{observe: 'response'})
         .map((res) => res.body)
         .catch(this.handleError);
     }

@@ -80,7 +80,7 @@ export class GooglemapComponent implements OnInit {
   mapAllDogs(){
   console.log("MAP ALL DOGS ESTE MAPA");
   console.log(this.map);
-  this.dogService.getList().subscribe((dogs)=> {this.dogs = dogs;
+  this.dogService.getList().subscribe((response)=> {this.dogs = response.body;
     //ahora esta funcion mapAllDogs de aqui para abajo solo sirve para sacar datos por consola
 
     console.log(this.dogs);
@@ -181,15 +181,13 @@ trazeRoute(){
     console.log("this route pair es");
     console.log(this.routePair);
 
-    this.session.get(this.routePair.userAdopt_id).subscribe((adoptUser)=> {
-      console.log(adoptUser.username); //OK
+    this.session.get(this.routePair.userAdopt_id).subscribe((response)=> {
         this.originUser={
-          lat: +adoptUser.latitude,
-          lng: +adoptUser.longitude
+          lat: +response.body.latitude,
+          lng: +response.body.longitude
         }
       })
     this.dogService.get(this.routePair.dog_id).subscribe((dogAdopted)=>{
-        console.log(dogAdopted[0].dogName); //OK
           this.destinationDog={
             lat: +dogAdopted[0].latitude,
             lng: +dogAdopted[0].longitude
