@@ -57,11 +57,8 @@ export class KgartenchieldComponent implements OnInit,OnChanges{
 
 getOwnerName(id){
   this.session.get(id)
-    .subscribe((owner)=>{
-      console.log(owner);
-      console.log(owner.username);
-      this.owner=owner.username;
-
+    .subscribe((response)=>{
+      this.owner=response.body.username;
     })
   }
 
@@ -76,9 +73,8 @@ getDogImage(id){
 
 getAdopterName(id){
   this.session.get(id)
-  .subscribe((adopter)=>{
-    console.log(adopter.username);
-    this.adopter=adopter.username;
+  .subscribe((response)=>{
+    this.adopter=response.body.username;
   })
 }
 
