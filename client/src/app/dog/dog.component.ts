@@ -82,6 +82,12 @@ deleteDog(dogId){
   }
 }
 
+editDog(dog){
+  console.log(dog);
+  //pendiente implementar
+  this.router.navigate(['editDog']);
+}
+
 /*
     getDogDetails(id) {
         this.dog.get(id)

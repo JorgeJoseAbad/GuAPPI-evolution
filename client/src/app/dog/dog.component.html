@@ -1,39 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
 
-<div class="dogList1">
 
-<h5 *ngIf="this.user" >Hello, {{this.user.username}}</h5>
-<h3> Dogs list </h3>
+      <div class="dogList1">
 
-<button (click)="getListMyDogs()"> View my dogs </button>
-<button (click)="getListAllDogs()"> View all dogs </button>
-<br>
-<p class="newdog" [routerLink]="['../newDog']">Add a new Dog</p>
+        <h5 *ngIf="this.user">Hello, {{this.user.username}}</h5>
+        <h3> Dogs list </h3>
 
-<div *ngIf="this.user; else elseBlock" >
-    <div *ngFor="let dog of dogs"  class="dogList2">
+        <button (click)="getListMyDogs()"> View my dogs </button>
+        <button (click)="getListAllDogs()"> View all dogs </button>
+        <br>
+        <p class="newdog" [routerLink]="['../newDog']">Add a new Dog</p>
 
-          <h5>
-                <app-childdog [dog]="dog">
-                </app-childdog>
-          </h5>
+        <div *ngIf="this.user; else elseBlock">
+          <div *ngFor="let dog of dogs" class="dogList2">
 
-          <h3> Dog name: {{ dog.dogName }}&nbsp;</h3>
+            <h5>
+              <app-childdog [dog]="dog">
+              </app-childdog>
+            </h5>
 
-          <img [src]='dog.imgUrl' />
-          <p> Breed: {{ dog.breed }} </p>
-          <p> Years old: {{ dog.age }} </p>
-          <p> Description {{dog.description}} </p>
-          <p> Pos lat: {{dog.latitude}}</p>
-          <p> Pos long: {{dog.longitude}}</p>
+            <h3> Dog name: {{ dog.dogName }}&nbsp;</h3>
 
-      <h6 *ngIf="this.user._id==dog.user_id">
-        <button (click)="sendDogKgarten(this.dog._id,this.user._id)"> Send {{dog.dogName}} to Kgarten </button>
-        <button (click)="deleteDog(this.dog._id)">Delete dog</button>
-      </h6>
+            <img [src]='dog.imgUrl' />
+            <p> Breed: {{ dog.breed }} </p>
+            <p> Years old: {{ dog.age }} </p>
+            <p> Description {{dog.description}} </p>
+            <p> Pos lat: {{dog.latitude}}</p>
+            <p> Pos long: {{dog.longitude}}</p>
+
+            <h6 *ngIf="this.user._id == dog.user_id">
+              <button (click)="sendDogKgarten(this.dog._id,this.user._id)"> Send to Kgarten </button>
+              <button (click)="deleteDog(this.dog._id)">Delete</button>
+              <button (click)="editDog(this.dog)">edit</button>
+            </h6>
+          </div>
+        </div>
+        <ng-template #elseBlock>
+          <div class="advert">You must be logged to see list of dogs</div>
+        </ng-template>
+
+      </div>
+
     </div>
   </div>
-  <ng-template #elseBlock >
-    <div class="advert" >You must be logged to see list of dogs</div>
-  </ng-template>
-
-  </div>
+</div>

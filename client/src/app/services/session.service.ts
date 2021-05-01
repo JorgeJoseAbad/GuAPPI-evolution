@@ -91,9 +91,9 @@ export class SessionService {
 
     }
 
-    get(id){
+    get(id:string):Observable<HttpResponse<User>>{
       return this.httpclient.get<User>(`${BASEURL}/api/user/${id}`,{observe: 'response' })
-      .map(res=>res.body)
+      .map(res=>res)
       .catch(this.handleError);
     }
 

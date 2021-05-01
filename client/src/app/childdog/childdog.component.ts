@@ -34,10 +34,10 @@ export class ChilddogComponent implements OnInit {
       //this.onGetOwner.emit(this.dog.user_id);
     }
 
-    getOwnerName(id){  
+    getOwnerName(id){
       this.session.get(id)
-      .subscribe((dog_owner)=>{
-        this.name=dog_owner.username
+      .subscribe((response)=>{
+        this.name=response.body.username
       });
 
     }
