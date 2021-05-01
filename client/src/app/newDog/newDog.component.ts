@@ -11,7 +11,6 @@ import { SessionService} from '../services/session.service';
 import { environment } from '../../environments/environment';
 
 
-
 @Component({
   selector: 'app-newDog',
   templateUrl: './newDog.component.html',
@@ -24,7 +23,6 @@ export class NewDogComponent implements OnInit {
   uploader: FileUploader = new FileUploader({
     //url: `http://localhost:3000/api/dog/`
     url: `${environment.apiUrl}/api/dog/`
-
   });
 
   user: any;
@@ -51,7 +49,7 @@ export class NewDogComponent implements OnInit {
    public zoom: number;
 
    @ViewChild("search")
-     public searchElementRef: ElementRef;
+   public searchElementRef: ElementRef;
 
     constructor(
       private session: SessionService,
@@ -100,7 +98,6 @@ ngOnInit() {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -127,7 +124,6 @@ ngOnInit() {
 
 
 addDog() {
-
     this.uploader.onBuildItemForm = (item, form) => {
         form.append('user_id',this.session.user._id);
         form.append('dogName', this.newDog.dogName);
@@ -136,18 +132,13 @@ addDog() {
         form.append('description', this.newDog.description);
         form.append('latitude', this.latitude);
         form.append('longitude', this.longitude);
-        console.log("form in this.uploader.onBulidItemForm ",form);
       };
     this.uploader.uploadAll();
 
-
-    //this.formInfo.latitude=this.latitude;
-    //this.formInfo.longitude=this.longitude;
-    //this.uploader.uploadAll();
-
     console.log(this.uploader);
 
-    /*this.session.newDog(this.newDog)
+    /*possible sending to service ? (uploader?)/*
+    /*this.session.newDog(this.session.user._id,this.newDog,this.latitude,this.longitude)
       .subscribe(
         (newDog) => this.successCb(newDog),
         (err) => this.errorCb(err)
