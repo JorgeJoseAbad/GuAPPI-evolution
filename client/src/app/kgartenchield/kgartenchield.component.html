@@ -3,7 +3,7 @@
       <p>Dog's owner: {{owner}}</p>
       <p>Adopted by: {{adopter}}</p>
 
-      <button (click)=adoptDog(pet._id,this.session.user._id)>Adopt it!</button>
+      <button (click)=adoptDog(pet._id)>Adopt it!</button>
       <div *ngIf="(this.session.user)&&(this.pet.userProp_id===this.session.user._id)">
             <button (click)=pulloutDog(pet._id)>pull out dog</button>
       </div>

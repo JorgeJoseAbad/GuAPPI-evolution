@@ -39,11 +39,12 @@ export class KgartenchieldComponent implements OnInit,OnChanges{
     this.getOwnerName(this.pet.userProp_id);
     this.getAdopterName(this.pet.userAdopt_id);
     this.getDogImage(this.pet.dog_id);
+    this.idUserLoged();
 
   }
 
   ngOnChanges(){
-    this.user=this.session.user;
+    this.idUserLoged();
     console.log("in ngOnChanges this.user "+this.user);
   }
 
@@ -78,21 +79,19 @@ getAdopterName(id){
   })
 }
 
-adoptDog(id,adopt_id){
-    console.log("adopting dog");
-    console.log(this.session.user.username);
-    this.adopter=this.session.user.username;
-    console.log(id);
-    console.log(adopt_id);
-    console.log(this.pet);
+adoptDog(id){
+
     this.updatedPet.dog_id=this.pet.dog_id;
-    this.updatedPet.userAdopt_id=adopt_id;
+    this.updatedPet.userAdopt_id=this.user._id;
     this.updatedPet.userProp_id=this.pet.userProp_id;
     console.log(this.updatedPet);
     this.kgartenservice.edit(id,this.updatedPet)
-    .subscribe((pet)=>{
-      console.log(pet);
-    })
+      .subscribe((pet)=>{
+        this.adopter = this.user.username
+        console.log("pet actualizada",pet);
+      },
+      (err)=>console.error(err)
+    )
     /*Send kagarten service the adopted pet*/
     this.kgartenservice.traceRoute(this.updatedPet);
 
@@ -103,10 +102,21 @@ if (window.confirm('Are you sure you want to take this dog out of kindergarten?'
   this.kgartenservice.delete(id)
     .subscribe((res)=>{
       console.log(res);
-      //this.router.navigate(['']); no util
-    })
+    },
+    (err)=>console.error(err)
+  )
   }
 }
+
+  idUserLoged(){
+      this.session.isLoggedIn()
+        .subscribe(
+          (response)=> {
+            this.user = response.body;
+          },
+          (err)=>console.error(err)
+        )
+    }
 
 
 }
