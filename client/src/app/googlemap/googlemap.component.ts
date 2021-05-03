@@ -132,7 +132,9 @@ export class GooglemapComponent implements OnInit {
 
       });
       this.userMarker = marker;
-    })
+    },
+      (err)=>console.error(err)
+    )
 
   } // function mapLogedUser
 
