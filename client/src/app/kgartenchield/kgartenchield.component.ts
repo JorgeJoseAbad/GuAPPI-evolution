@@ -49,9 +49,9 @@ export class KgartenchieldComponent implements OnInit,OnChanges{
 
   getDogName(id){
     this.dogservice.get(id)
-    .subscribe((dog)=>{
-      console.log(dog[0].dogName);
-      this.dogName=dog[0].dogName;
+    .subscribe((response)=>{
+      console.log(response.body[0].dogName);
+      this.dogName=response.body[0].dogName;
     })
   }
 
@@ -64,9 +64,9 @@ getOwnerName(id){
 
 getDogImage(id){
   this.dogservice.get(id)
-  .subscribe((dog)=>{
-    console.log(dog[0].imgUrl);
-    this.imageURL=dog[0].imgUrl;
+  .subscribe((response)=>{
+    console.log(response.body[0].imgUrl);
+    this.imageURL=response.body[0].imgUrl;
     console.log(this.imageURL);
   });
 };
