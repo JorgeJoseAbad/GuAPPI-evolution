@@ -107,8 +107,7 @@ export class GooglemapComponent implements OnInit {
 
 
   mapLogedUser() {
-
-    this.session.get(this.session.user._id).subscribe((logUser) => {
+    this.session.isLoggedIn().subscribe((logUser) => {
       this.logUser = logUser.body;
       this.userCoord.lat = +this.logUser.latitude;
       this.userCoord.lng = +this.logUser.longitude;
@@ -122,7 +121,7 @@ export class GooglemapComponent implements OnInit {
       };
 
       let marker = new google.maps.Marker({
-        icon: image,  
+        icon: image,
         position: this.userCoord,
         title: 'Hello World!',
         label: {
