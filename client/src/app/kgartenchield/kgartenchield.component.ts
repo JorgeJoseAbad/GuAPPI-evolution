@@ -4,6 +4,7 @@ import { DogService } from '../services/dog.service';
 import { SessionService } from '../services/session.service';
 import { KgartenService } from '../services/kgarten.service';
 import { Router } from '@angular/router';
+import { SlicePipe } from "../../../node_modules/@angular/common";
 
 @Component({
   selector: 'app-kgartenchield',
@@ -24,6 +25,7 @@ export class KgartenchieldComponent implements OnInit, OnChanges {
     userProp_id: '',
   };
   user: any = null;
+  error: string = null;
 
 
   constructor(
@@ -83,9 +85,8 @@ export class KgartenchieldComponent implements OnInit, OnChanges {
     this.session.isLoggedIn()
       .subscribe(
         (res) => {
-          if (res.body.username) {
             this.updatedPet.dog_id = this.pet.dog_id;
-            this.updatedPet.userAdopt_id = this.user._id;
+            this.updatedPet.userAdopt_id = res.body._id;
             this.updatedPet.userProp_id = this.pet.userProp_id;
             console.log(this.updatedPet);
             this.kgartenservice.edit(id, this.updatedPet)
@@ -95,11 +96,16 @@ export class KgartenchieldComponent implements OnInit, OnChanges {
                 /*Send kagarten service the adopted pet*/
                 this.kgartenservice.traceRoute(this.updatedPet);
               },
-                (err) => console.error(err)
+                (err) => {
+                  console.error(err);
+                  this.error = err;
+                }
               )
-          }
         },
-        (err) => console.error(err)
+        (err) => {
+          console.error(err);
+          this.error = err;
+        }
       )
   }
 

@@ -7,3 +7,6 @@
       <div *ngIf="(this.session.user)&&(this.pet.userProp_id===this.session.user._id)">
             <button (click)=pulloutDog(pet._id)>pull out dog</button>
       </div>
+      <div *ngIf="error">
+        {{error}}
+      </div>
