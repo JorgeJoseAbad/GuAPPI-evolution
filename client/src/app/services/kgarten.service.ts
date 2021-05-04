@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class KgartenService {
   //BASE_URL: string = 'http://localhost:3000';
-  BASE_URL: string =environment.apiUrl;
+  BASE_URL: string = environment.apiUrl;
   routePair;
 
   constructor(private httpclient: HttpClient) { }
@@ -43,7 +43,7 @@ export class KgartenService {
 
     edit(dogKgarten,updatedPet): Observable<HttpResponse<any>> {
       console.log(dogKgarten,updatedPet);
-      return this.httpclient.put<any>(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet,{observe: 'response'})
+      return this.httpclient.patch<any>(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet,{observe: 'response'})
         .map((res) => res.body)
         .catch(this.handleError);
     }
