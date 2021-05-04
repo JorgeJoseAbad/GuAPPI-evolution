@@ -38,24 +38,24 @@ imgorigin=environment.apiUrl;
   ) { }
 
   ngOnInit() {
-
-    this.user=this.session.user;
+    this.session.isLoggedIn()
+      .subscribe(
+        (response)=> this.user = response.body,
+        (err)=> console.log(err)
+      )
   }
 
-
   getListMyDogs(){
-     console.log(this.session.user._id);
-     console.log(this.session.user.username);
-      this.dogservice.getDogsByOwnerID(this.session.user._id)
-        .subscribe((dogs) => {
-          this.dogs = dogs;
+      this.dogservice.getDogsByOwnerID(this.user._id)
+        .subscribe((response) => {
+          this.dogs = response;
         });
       }
 
   getListAllDogs(){
       this.dogservice.getList()
-        .subscribe((dogs) => {
-          this.dogs = dogs;
+        .subscribe((response) => {
+          this.dogs = response;
         });
       }
 

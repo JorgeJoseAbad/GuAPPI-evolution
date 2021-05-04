@@ -22,7 +22,7 @@ export class DogService {
 
   getList():Observable<HttpResponse<any>> {
     return this.httpclient.get<any>(`${this.BASE_URL}/api/dog`,{observe: 'response' })
-      .map((res) => res)
+      .map((res) => res.body)
       .catch(this.handleError);
   }
 
@@ -61,8 +61,8 @@ export class DogService {
   }
 
 
-  getDogsByOwnerID(id){
-    return this.httpclient.get(`${this.BASE_URL}/api/dog/user/${id}`,{observe: 'response'})
+  getDogsByOwnerID(id):Observable<HttpResponse<any>>{
+    return this.httpclient.get<any>(`${this.BASE_URL}/api/dog/user/${id}`,{observe: 'response'})
       .map((res) => res.body)
       .catch(this.handleError);
 
