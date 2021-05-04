@@ -22,7 +22,6 @@ export class KgartenService {
    }
 
     getList(): Observable<HttpResponse<any>> {
-      console.log("en getlist kgarten service");
       return this.httpclient.get<any>(`${this.BASE_URL}/api/kgarten`,{observe: 'response'})
         .map((res) => res)
         .catch(this.handleError);
@@ -35,21 +34,18 @@ export class KgartenService {
     }
 
     add(dogKgarten) {
-      console.log(dogKgarten);
       return this.httpclient.post(`${this.BASE_URL}/api/kgarten`,dogKgarten,{observe: 'response'})
         .map((res)=> res.body)
         .catch(this.handleError);
     }
 
     edit(dogKgarten,updatedPet): Observable<HttpResponse<any>> {
-      console.log(dogKgarten,updatedPet);
       return this.httpclient.patch<any>(`${this.BASE_URL}/api/kgarten/${dogKgarten}`, updatedPet,{observe: 'response'})
         .map((res) => res.body)
         .catch(this.handleError);
     }
 
     delete(id) {
-      console.log(id);
       return this.httpclient.delete(`${this.BASE_URL}/api/kgarten/${id}`,{observe: 'response'})
         .map((res) => res.body)
         .catch(this.handleError);
@@ -57,28 +53,12 @@ export class KgartenService {
 
    /*receive the pet adopted from kgartenchield component*/
     traceRoute(pet){
-      console.log("in kartenservice trazeRoute",pet);
       this.routePair=pet;
-      console.log("routePair",this.routePair);
     }
 
     /*return adopted pet to googlemapComponent*/
     getRoute(){
-      console.log("in getRoute");
       return this.routePair;
     }
-
-
-    /*getDogName(id){
-      return this.http.get(`${this.BASE_URL}/api/dog/${id}`)
-        .map((res)=>res.json());
-    }
-
-    edit(dog) {
-      return this.http.put(`${this.BASE_URL}/api/dog/${dog.id}`, dog)
-        .map((res) => res.json());
-    }*/
-
-
 
 }
