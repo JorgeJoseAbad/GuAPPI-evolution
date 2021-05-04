@@ -14,7 +14,7 @@ export class KgartenComponent implements OnInit {
   pets:any;
   dog:any;
   dogName:any;
-  user:any;
+  user:any = undefined;
   message:any;
 
   constructor(
@@ -24,6 +24,7 @@ export class KgartenComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.petgarden.getList()
     .subscribe(
       (response) => this.pets = response.body,
@@ -32,16 +33,20 @@ export class KgartenComponent implements OnInit {
   }
 
 updateKgarten(){
-  if ((this.session.user!==undefined)&&(this.session.user!==null)){
-    console.log(this.session.user);
-    this.message="Updated by you, "+this.session.user.username;
-    this.petgarden.getList()
-    .subscribe(
-      (response) => this.pets = response.body,
-      (err) => this.message = err
-    );
-  } else this.message="You must be logged to update"
-}
+    this.session.isLoggedIn()
+      .subscribe(
+        (response)=>{
+          this.user = response.body
+          this.message="Updated by you, "+this.user.username;
+          this.petgarden.getList()
+          .subscribe(
+            (response) => this.pets = response.body,
+            (err) => this.message = err
+          );
+        },
+        (err)=>this.message = err
+      );
+  }
 
 
 }

@@ -92,6 +92,7 @@ export class SessionService {
     }
 
     get(id:string):Observable<HttpResponse<User>>{
+      console.warn("estoy en get")
       return this.httpclient.get<User>(`${BASEURL}/api/user/${id}`,{observe: 'response' })
       .map(res=>res)
       .catch(this.handleError);

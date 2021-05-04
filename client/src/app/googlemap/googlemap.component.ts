@@ -22,8 +22,7 @@ export class GooglemapComponent implements OnInit {
   title: string = 'Dogs Map';
   lat: number = 40.45;
   lng: number = -3.65500;
-  dogs = [];
-
+  dogs: any;
   map;
   routePair;
   destinationDog;
@@ -67,7 +66,7 @@ export class GooglemapComponent implements OnInit {
     console.log("MAP ALL DOGS ESTE MAPA");
     console.log(this.map);
     this.dogService.getList().subscribe((response) => {
-      this.dogs = response.body;
+      this.dogs = response;
       this.drawDogsInMap();
     })
   }
@@ -89,6 +88,8 @@ export class GooglemapComponent implements OnInit {
         title: this.dogs[i].dogName,
       });
     }
+
+    this.title = "Dogs marked in map"
 
     //esto del navigator geolocation no debería ir aqui
     if (navigator.geolocation) {
@@ -132,8 +133,12 @@ export class GooglemapComponent implements OnInit {
 
       });
       this.userMarker = marker;
+      this.title = "Logged user marked in map"
     },
-      (err)=>console.error(err)
+      (err)=>{
+        console.error(err);
+        this.title = err;
+      }
     )
 
   } // function mapLogedUser
@@ -142,52 +147,66 @@ export class GooglemapComponent implements OnInit {
   trazeRoute() {
     this.routePair = this.kgarten.getRoute();
 
-    this.session.get(this.routePair.userAdopt_id).subscribe((response) => {
-      this.originUser = {
-        lat: +response.body.latitude,
-        lng: +response.body.longitude
-      };
-          this.pointA = new google.maps.LatLng(this.originUser.lat, this.originUser.lng);
-          let image = {
-            //url: 'https://maps.google.com/mapfiles/kml/pal2/icon1.png',
-            url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            size: new google.maps.Size(40, 40),// This marker is 20 pixels wide by 32 pixels high.
-            origin: new google.maps.Point(0, 0),// The origin for this image is (0, 0).
-            anchor: new google.maps.Point(0, 30)// The anchor for this image is the base of the flagpole at (0, 32).
-          };
-          this.markerA = new google.maps.Marker({
-            icon: image,
-            position: this.pointA,
-            title: "point A",
-            label: "A",
-            //map: this.map
-          });
-          console.log("en localizacion perro adoptado");
-    })
-
-    this.dogService.get(this.routePair.dog_id).subscribe((response) => {
-      this.destinationDog = {
-        lat: +response.body[0].latitude,
-        lng: +response.body[0].longitude
-      };
-          this.pointB = new google.maps.LatLng(this.destinationDog.lat, this.destinationDog.lng);
-          let image = {
-            //url: 'https://maps.google.com/mapfiles/kml/pal2/icon1.png',
-            url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            size: new google.maps.Size(40, 40),// This marker is 20 pixels wide by 32 pixels high.
-            origin: new google.maps.Point(0, 0),// The origin for this image is (0, 0).
-            anchor: new google.maps.Point(0, 30)// The anchor for this image is the base of the flagpole at (0, 32).
-          };
-          this.markerB = new google.maps.Marker({
+    if (this.routePair){
+      this.session.get(this.routePair.userAdopt_id)
+      .subscribe(
+        (response) => {
+        this.originUser = {
+          lat: +response.body.latitude,
+          lng: +response.body.longitude
+        };
+            this.pointA = new google.maps.LatLng(this.originUser.lat, this.originUser.lng);
+            let image = {
+              //url: 'https://maps.google.com/mapfiles/kml/pal2/icon1.png',
+              url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+              size: new google.maps.Size(40, 40),// This marker is 20 pixels wide by 32 pixels high.
+              origin: new google.maps.Point(0, 0),// The origin for this image is (0, 0).
+              anchor: new google.maps.Point(0, 30)// The anchor for this image is the base of the flagpole at (0, 32).
+            };
+            this.markerA = new google.maps.Marker({
               icon: image,
-              position: this.pointB,
-              title: "point B",
-              label: "B",
+              position: this.pointA,
+              title: "point A",
+              label: "A",
               //map: this.map
             });
+            console.log("en localizacion perro adoptado");
+      },
+      (err)=>console.error(err)
+    )
 
-    })
+      this.dogService.get(this.routePair.dog_id)
+      .subscribe(
+        (response) => {
+        this.destinationDog = {
+          lat: +response.body[0].latitude,
+          lng: +response.body[0].longitude
+        };
+            this.pointB = new google.maps.LatLng(this.destinationDog.lat, this.destinationDog.lng);
+            let image = {
+              //url: 'https://maps.google.com/mapfiles/kml/pal2/icon1.png',
+              url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+              size: new google.maps.Size(40, 40),// This marker is 20 pixels wide by 32 pixels high.
+              origin: new google.maps.Point(0, 0),// The origin for this image is (0, 0).
+              anchor: new google.maps.Point(0, 30)// The anchor for this image is the base of the flagpole at (0, 32).
+            };
+            this.markerB = new google.maps.Marker({
+                icon: image,
+                position: this.pointB,
+                title: "point B",
+                label: "B",
+                //map: this.map
+              });
 
+      },
+      (err)=>console.error(err)
+    )
+    this.title = "Adoption route marked"
+
+  } else {
+    console.warn("no se ha efectuado adopción");
+    this.title = "There is not adoption"
+  }
   }
 
 }
