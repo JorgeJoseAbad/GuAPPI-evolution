@@ -88,13 +88,12 @@ export class KgartenchieldComponent implements OnInit, OnChanges {
             this.updatedPet.dog_id = this.pet.dog_id;
             this.updatedPet.userAdopt_id = res.body._id;
             this.updatedPet.userProp_id = this.pet.userProp_id;
-            console.log(this.updatedPet);
+            this.user = res.body;
             this.kgartenservice.edit(id, this.updatedPet)
               .subscribe((pet) => {
-                this.adopter = this.user.username
-                console.log("pet actualizada", pet);
+                this.adopter = this.user.username;
                 /*Send kagarten service the adopted pet*/
-                this.kgartenservice.traceRoute(this.updatedPet);
+                this.kgartenservice.traceRoute(pet);
               },
                 (err) => {
                   console.error(err);
