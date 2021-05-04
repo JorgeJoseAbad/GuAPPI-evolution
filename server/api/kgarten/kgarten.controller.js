@@ -63,7 +63,7 @@ exports.editKgarten=function(req,res,next){
   };
 
  console.log(updates);
-  kgarten.findByIdAndUpdate(req.params.id, updates, function(err,pet){
+  kgarten.findByIdAndUpdate(req.params.id, updates, {new:true},function(err,pet){
     if (err) {
       console.log(err);
       return res.json(err);
