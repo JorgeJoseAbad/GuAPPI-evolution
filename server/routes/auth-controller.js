@@ -15,14 +15,13 @@ const bcryptSalt     = 10;
 console.log("authController");
 
 authController.post("/signup", (req, res, next) => {
-  console.log(req.body);
+
   var username = req.body.username;
   var password = req.body.password;
   var email    = req.body.email;
   var address  = req.body.address;
   var longitude= req.body.longitude;
   var latitude = req.body.latitude;
-
 
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" });
