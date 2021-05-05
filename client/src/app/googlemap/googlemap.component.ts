@@ -53,13 +53,13 @@ export class GooglemapComponent implements OnInit {
     private session: SessionService,
     private kgarten: KgartenService,
 
-  ) {}
+  ) { }
 
   ngOnInit() {
     console.log("in NGONINIT");
     this.mapsAPILoader.load().then(() => {
-     this.map = document.getElementById('map');
-   })
+      this.map = document.getElementById('map');
+    })
   }
 
   mapAllDogs() {
@@ -99,7 +99,7 @@ export class GooglemapComponent implements OnInit {
           lng: position.coords.longitude
         };
         console.log('center: ', center)
-      }, function() {console.log('Error in the geolocation service.');});
+      }, function() { console.log('Error in the geolocation service.'); });
     } else {
       console.log('Browser does not support geolocation.');
     }
@@ -135,7 +135,7 @@ export class GooglemapComponent implements OnInit {
       this.userMarker = marker;
       this.title = "Logged user marked in map"
     },
-      (err)=>{
+      (err) => {
         console.error(err);
         this.title = err;
       }
@@ -143,18 +143,33 @@ export class GooglemapComponent implements OnInit {
 
   } // function mapLogedUser
 
-  /*This function must place two markers an trace a route between them*/
-  trazeRoute() {
-    this.routePair = this.kgarten.getRoute();
 
-    if (this.routePair){
-      this.session.get(this.routePair.userAdopt_id)
+  //retrieve router pair and logged user data
+  trazeRoute() {
+    this.mapLogedUser();
+    this.routePair = this.kgarten.getRoute();
+    this.session.isLoggedIn()
       .subscribe(
         (response) => {
-        this.originUser = {
-          lat: +response.body.latitude,
-          lng: +response.body.longitude
-        };
+          this.logUser = response.body;
+          this.drawRoute(this.routePair, this.logUser);
+        },
+        (err) => console.log(err)
+      )
+
+  }
+
+  /*This function must place two markers an trace a route between them*/
+  drawRoute(routePair, logUser) {
+    let  adoptedDogName: string = null;
+    if (routePair && (routePair.userAdopt_id === logUser._id)) {
+      this.session.get(this.routePair.userAdopt_id)
+        .subscribe(
+          (response) => {
+            this.originUser = {
+              lat: +response.body.latitude,
+              lng: +response.body.longitude
+            };
             this.pointA = new google.maps.LatLng(this.originUser.lat, this.originUser.lng);
             let image = {
               //url: 'https://maps.google.com/mapfiles/kml/pal2/icon1.png',
@@ -171,17 +186,18 @@ export class GooglemapComponent implements OnInit {
               //map: this.map
             });
             console.log("en localizacion perro adoptado");
-      },
-      (err)=>console.error(err)
-    )
+          },
+          (err) => console.error(err)
+        )
 
       this.dogService.get(this.routePair.dog_id)
-      .subscribe(
-        (response) => {
-        this.destinationDog = {
-          lat: +response.body[0].latitude,
-          lng: +response.body[0].longitude
-        };
+        .subscribe(
+          (response) => {
+            adoptedDogName = response.body[0].dogName;
+            this.destinationDog = {
+              lat: +response.body[0].latitude,
+              lng: +response.body[0].longitude
+            };
             this.pointB = new google.maps.LatLng(this.destinationDog.lat, this.destinationDog.lng);
             let image = {
               //url: 'https://maps.google.com/mapfiles/kml/pal2/icon1.png',
@@ -191,22 +207,24 @@ export class GooglemapComponent implements OnInit {
               anchor: new google.maps.Point(0, 30)// The anchor for this image is the base of the flagpole at (0, 32).
             };
             this.markerB = new google.maps.Marker({
-                icon: image,
-                position: this.pointB,
-                title: "point B",
-                label: "B",
-                //map: this.map
-              });
+              icon: image,
+              position: this.pointB,
+              title: "point B",
+              label: "B",
+              //map: this.map
+            });
+            this.title = "Adoption route marked from " + logUser.username + " to " + adoptedDogName;
 
-      },
-      (err)=>console.error(err)
-    )
-    this.title = "Adoption route marked"
+          },
+          (err) => console.error(err)
+        )
 
-  } else {
-    console.warn("no se ha efectuado adopción");
-    this.title = "There is not adoption"
-  }
+    } else {
+      this.originUser = null;
+      this.destinationDog = null
+      console.warn("There is not adoption by you, " + logUser.username);
+      this.title = "There is not adoption by you, " + logUser.username;
+    }
   }
 
 }
