@@ -1,4 +1,7 @@
-
+nav{
+  border:2px solid black;
+  box-shadow: 7px 7px 6px 3px black;
+}
 .navbar-brand{
   font-style: oblique;
   font-weight: bold;
