@@ -40,6 +40,10 @@ export class GooglemapComponent implements OnInit {
     lng: 9
   };
 
+  theColor = "red";
+  adoptedDogsCoordinates:Array<any> = [];
+  traze: boolean = false;
+
   @ViewChild("search")
   public searchElementRef: ElementRef
   dogMarker;
@@ -67,7 +71,7 @@ export class GooglemapComponent implements OnInit {
     console.log(this.map);
     this.dogService.getList().subscribe((response) => {
       this.dogs = response;
-      this.drawDogsInMap();
+      //this.drawDogsInMap();
     })
   }
 
@@ -153,6 +157,7 @@ export class GooglemapComponent implements OnInit {
         (response) => {
           this.logUser = response.body;
           this.drawRoute(this.routePair, this.logUser);
+          this.getAdoptedDogs(this.logUser); // new, to call all adopted dogs
         },
         (err) => console.log(err)
       )
@@ -213,7 +218,7 @@ export class GooglemapComponent implements OnInit {
               label: "B",
               //map: this.map
             });
-            this.title = "Adoption route marked from " + logUser.username + " to " + adoptedDogName;
+            this.title = "Last adoption route marked from " + logUser.username + " to " + adoptedDogName;
 
           },
           (err) => console.error(err)
@@ -222,9 +227,72 @@ export class GooglemapComponent implements OnInit {
     } else {
       this.originUser = null;
       this.destinationDog = null
-      console.warn("There is not adoption by you, " + logUser.username);
-      this.title = "There is not adoption by you, " + logUser.username;
+      console.warn("There is not new adoption by you, " + logUser.username);
+      this.title = "There is not new adoption by you, " + logUser.username;
     }
+  }
+
+  /*new,get all adopted dogs and show routes"!!,
+  methods for previously adopted dogs!! */
+  getAdoptedDogs(user){
+
+    this.adoptedDogsCoordinates = []; //reset, para evitar cargar los del usuario anterior
+    this.traze = false; //reset, para evitar cargar datos anteirores
+
+
+    this.kgarten.getList()
+    .subscribe(
+      (response)=>{
+        console.log(response);
+        this.selectUserAdoptedDogs(response.body,user);
+      },
+      (err)=>console.log(err)
+    )
+  }
+
+  selectUserAdoptedDogs(listDogsAdopted,user){
+    console.log("in selectUSerAdoptedDogs");
+    console.log(user);
+    console.log(listDogsAdopted);
+    let userAdoptedDogs = listDogsAdopted.filter(function(dog){
+      return dog.userAdopt_id === user._id});
+    console.warn(userAdoptedDogs);
+    this.getAdoptedDogsCoordinates(userAdoptedDogs,user);
+  }
+
+  getAdoptedDogsCoordinates(userAdoptedDogs,user){
+    let userAdoptedDog;
+
+
+    userAdoptedDogs.forEach(dog => {
+      this.dogService.get(dog.dog_id)
+        .subscribe(
+          (response)=>{
+            userAdoptedDog = {
+              lat: +response.body[0].latitude,
+              lng: +response.body[0].longitude
+            };
+           this.adoptedDogsCoordinates.push(userAdoptedDog);
+          },
+          (err)=>console.error(err)
+        );
+
+    });
+
+      this.originUser = {
+        lat: user.latitude,
+        lng: user.longitude
+      }
+
+  }
+
+  trazeToTrue(){
+
+    this.traze = true;
+    this.title = "These are your adopted routes, "+ this.logUser.username;
+    console.warn(this.traze)
+    console.log(this.originUser);
+    console.log(this.adoptedDogsCoordinates)
   }
 
 }

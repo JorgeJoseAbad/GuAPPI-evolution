@@ -9,7 +9,8 @@
 
   <button (click)="mapAllDogs()">Map dogs</button>
   <button (click)="mapLogedUser()">Map user</button>
-  <button (click)="trazeRoute()">Show rute adoption</button>
+  <button (click)="trazeRoute()">Show rute last adoption</button>
+  <button (click)="trazeToTrue()">Show rute adoptions</button>
 </div>
 
 <agm-map  id="map" [latitude]="lat" [longitude]="lng">
@@ -47,7 +48,8 @@
         >
     </agm-circle>
 
-    <agm-polyline [geodesic]=true>
+
+    <agm-polyline [geodesic]=true [strokeColor]="theColor">
             <agm-polyline-point
                             [latitude]="originUser.lat"
                             [longitude]="originUser.lng"
@@ -61,5 +63,22 @@
     </agm-polyline>
  </div>
 
+
+  <div *ngIf="traze">
+    <div *ngFor="let adoptedDogsCoordinate of adoptedDogsCoordinates" >
+      <agm-polyline [geodesic]=true>
+              <agm-polyline-point
+                              [latitude]="originUser.lat"
+                              [longitude]="originUser.lng"
+                              >
+               </agm-polyline-point>
+               <agm-polyline-point
+                               [latitude]="adoptedDogsCoordinate.lat"
+                               [longitude]="adoptedDogsCoordinate.lng"
+                               >
+              </agm-polyline-point>
+      </agm-polyline>
+    </div>
+  </div>
 
 </agm-map>
