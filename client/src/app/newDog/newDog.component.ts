@@ -60,7 +60,12 @@ export class NewDogComponent implements OnInit {
 
 ngOnInit() {
 
-    this.user=this.session.user;
+    this.session.isLoggedIn()
+      .subscribe(
+        (response)=>this.user=response.body,
+        (err)=>this.error = err,
+      )
+
     this.uploaderSuccess = false;
     this.uploaderError = false;
     console.log(this.user);
