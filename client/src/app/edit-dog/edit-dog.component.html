@@ -2,32 +2,32 @@
   <div class="row">
     <div *ngIf="this.user; else elseBlock" >
       <h3>
-        Modify this dog  {{this.user.username}}
+        Modify this dog
       </h3>
       <div class="col-sm-6 centered-form">
-        <form *ngIf="!dogSaved" class="form-group" action="/newDog" method="post">
+        <form *ngIf="!changeSuccess" class="form-group" action="/newDog" method="post">
 
           <div class="form-group">
             <label> Dog Name </label>
-            <input type="text" [(ngModel)]="editDog.dogName" name="dogName"/>
+            <input type="text" [(ngModel)]="dogToEdit.dogName" name="dogName"/>
           </div>
 
           <div class="form-group">
             <label> Breed </label>
             <select  class="form-control"  id="breed" required
-                [(ngModel)]="editDog.breed" name="breed">
+                [(ngModel)]="dogToEdit.breed" name="breed">
               <option *ngFor="let breed of breeds" [value]="breed">{{breed}}</option>
             </select>
           </div>
 
           <div class="form-group">
             <label> age </label>
-            <input type="number" [(ngModel)]="editDog.age" name="age"/>
+            <input type="number" [(ngModel)]="dogToEdit.age" name="age"/>
           </div>
 
           <div class="form-group">
             <label> Description </label>
-            <input type="textarea" [(ngModel)]="editDog.description" name="description"/>
+            <input type="textarea" [(ngModel)]="dogToEdit.description" name="description"/>
           </div>
   <!--
           <div class="form-group">
@@ -51,11 +51,12 @@
             <p> Here's the dog component </p>
             <pre> {{ editedDog | json }} </pre>
           </div>
-          <div *ngIf="!newDog.dogName">
+          <div *ngIf="!editedDog.dogName">
             <h2> Error on validacion model Dog </h2>
             <p> Here's the error </p>
             <pre> {{ error | json }} </pre>
           </div>
+
         </div>
         <div *ngIf="changeError" class="dog-info">
           <h2> There is an error on uploader access!! </h2>
@@ -64,10 +65,12 @@
         </div>
           <p class="error"> {{ error }} </p>
 
+      <button type="button" name="button" [routerLink]="['../dog']">Volver a dogs</button>
       </div>
     </div>
     <ng-template #elseBlock >
-      <div class="advert" >You must be logged to add a new dog</div>
+      <div class="advert" >You must be logged to change a new dog</div>
     </ng-template>
+
   </div>
 </div>
