@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div *ngIf="this.user; else elseBlock" >
+      <h3>
+        Modify this dog  {{this.user.username}}
+      </h3>
+      <div class="col-sm-6 centered-form">
+        <form *ngIf="!dogSaved" class="form-group" action="/newDog" method="post">
+
+          <div class="form-group">
+            <label> Dog Name </label>
+            <input type="text" [(ngModel)]="editDog.dogName" name="dogName"/>
+          </div>
+
+          <div class="form-group">
+            <label> Breed </label>
+            <select  class="form-control"  id="breed" required
+                [(ngModel)]="editDog.breed" name="breed">
+              <option *ngFor="let breed of breeds" [value]="breed">{{breed}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label> age </label>
+            <input type="number" [(ngModel)]="editDog.age" name="age"/>
+          </div>
+
+          <div class="form-group">
+            <label> Description </label>
+            <input type="textarea" [(ngModel)]="editDog.description" name="description"/>
+          </div>
+  <!--
+          <div class="form-group">
+            <label>Photo</label>
+              <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+            </div>
+
+          <div class="form-group">
+            <label>Location</label>
+            <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+          </div>-->
+          <br>
+
+          <button (click)="changeDog()"> Change Dog </button>
+
+        </form>
+
+        <div *ngIf="changeSuccess" id="dog-info">
+          <div *ngIf="editedDog.dogName">
+            <h2> Dog changed: {{ editedDog.dogName }}!! </h2>
+            <p> Here's the dog component </p>
+            <pre> {{ editedDog | json }} </pre>
+          </div>
+          <div *ngIf="!newDog.dogName">
+            <h2> Error on validacion model Dog </h2>
+            <p> Here's the error </p>
+            <pre> {{ error | json }} </pre>
+          </div>
+        </div>
+        <div *ngIf="changeError" class="dog-info">
+          <h2> There is an error on uploader access!! </h2>
+          <p> Here's the error </p>
+          <pre> {{ error | json }} </pre>
+        </div>
+          <p class="error"> {{ error }} </p>
+
+      </div>
+    </div>
+    <ng-template #elseBlock >
+      <div class="advert" >You must be logged to add a new dog</div>
+    </ng-template>
+  </div>
+</div>

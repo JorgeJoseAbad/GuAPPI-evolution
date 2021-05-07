@@ -85,6 +85,7 @@ deleteDog(dogId){
 editDog(dog){
   console.log(dog);
   //pendiente implementar
+  this.dogservice.setActualDog(dog);
   this.router.navigate(['editDog']);
 }
 

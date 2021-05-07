@@ -111,3 +111,21 @@ exports.readDog=function(req,res,next){
 				});
 
 		};
+
+		exports.editDog = function(req,res,next){
+			const id = req.params.id;
+			var updates = {
+					dogName: req.body.dogName,
+					breed: req.body.breed,
+					age:req.body.age,
+					description:req.body.description,
+			};
+			dogModel.findByIdAndUpdate(id, updates, {new:true}, function(err,dog){
+					if (err) {
+			      console.log(err);
+			      return res.json(err);
+			    }
+			    console.log(req.body);
+			    return res.json(dog);
+				});
+		};

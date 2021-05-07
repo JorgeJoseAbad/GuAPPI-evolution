@@ -13,6 +13,8 @@ export class DogService {
   //BASE_URL: string = 'http://localhost:3000';
   options: Object = {withCredentials:true};
 
+  dog: any; //dog for auxiliar ...
+
   constructor(private httpclient: HttpClient) {}
 
   handleError(e) {
@@ -40,7 +42,7 @@ export class DogService {
     return this.httpclient.post(`${this.BASE_URL}/api/dog`, {dog},{withCredentials:true,observe: 'response'})
       .map(res => res.body)
       .catch(this.handleError);
-  }*/
+  }
 
   add(dog) {
     return this.httpclient.post(`${this.BASE_URL}/api/dog`,dog,{observe: 'response'})
@@ -48,8 +50,10 @@ export class DogService {
       .catch(this.handleError);
   }
 
-  edit(dog) {
-    return this.httpclient.put(`${this.BASE_URL}/api/dog/${dog.id}`, dog,{observe: 'response'})
+  */
+
+  edit(dog):Observable<HttpResponse<any>> {
+    return this.httpclient.patch<any>(`${this.BASE_URL}/api/dog/${dog._id}`, dog ,{observe: 'response'})
       .map((res) => res.body)
       .catch(this.handleError);
   }
@@ -67,5 +71,16 @@ export class DogService {
       .catch(this.handleError);
 
   }
+
+  setActualDog(dog){
+      this.dog = dog;
+      console.log("En el servicio, ",this.dog);
+  }
+
+  getActualDog():Observable<any>{
+      return this.dog;
+  }
+
+
 
 }

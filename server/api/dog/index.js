@@ -8,7 +8,7 @@ router.post('/', upload.single('file'), controller.createDog);
 router.get('/', controller.readDogs);
 router.get('/user/:id', controller.readDogByIdUser);
 router.get('/:id', controller.readDogById);
-//router.put('/:id', controller.editDog);
+router.patch('/:id', controller.editDog);
 router.delete('/:id', controller.deleteDog);
 
 module.exports = router;

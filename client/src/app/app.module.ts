@@ -35,6 +35,7 @@ import { KgartenService} from './services/kgarten.service';
 
 import { environment} from '../environments/environment';
 import { KgartenchieldComponent } from './kgartenchield/kgartenchield.component';
+import { EditDogComponent } from './edit-dog/edit-dog.component';
 
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
   { path: 'signup',  component: SignupComponent},
   { path: 'login', component: LoginComponent},
   { path: 'dog', component: DogComponent},
-  { path: 'newDog', component: NewDogComponent}
+  { path: 'newDog', component: NewDogComponent},
+  { path: 'editDog', component: EditDogComponent}
 ];
 
 @NgModule({
@@ -59,7 +61,8 @@ const routes: Routes = [
     KgartenComponent,
     NewDogComponent,
     ChilddogComponent,
-    KgartenchieldComponent
+    KgartenchieldComponent,
+    EditDogComponent
   ],
   imports: [
     ReactiveFormsModule,
