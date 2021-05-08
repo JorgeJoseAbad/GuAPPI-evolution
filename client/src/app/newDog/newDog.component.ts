@@ -22,7 +22,8 @@ export class NewDogComponent implements OnInit {
 
   uploader: FileUploader = new FileUploader({
     //url: `http://localhost:3000/api/dog/`
-    url: `${environment.apiUrl}/api/dog/`
+    url: `${environment.apiUrl}/api/dog/`,
+    method: "POST"  //nuevo
   });
 
   user: any;
@@ -76,6 +77,7 @@ ngOnInit() {
           };
     this.uploader.onErrorItem = (item, response, status, headers) => {
             this.uploaderError = true;
+            debugger;
             this.error = JSON.parse(response).message;
           };
 
@@ -129,8 +131,9 @@ ngOnInit() {
 
 
 addDog() {
+
     this.uploader.onBuildItemForm = (item, form) => {
-        form.append('user_id',this.session.user._id);
+        form.append('user_id',this.user._id);
         form.append('dogName', this.newDog.dogName);
         form.append('breed', this.newDog.breed);
         form.append('age', this.newDog.age);
@@ -142,12 +145,6 @@ addDog() {
 
     console.log(this.uploader);
 
-    /*possible sending to service ? (uploader?)/*
-    /*this.session.newDog(this.session.user._id,this.newDog,this.latitude,this.longitude)
-      .subscribe(
-        (newDog) => this.successCb(newDog),
-        (err) => this.errorCb(err)
-      );*/
   }
 
   errorCb(err) {

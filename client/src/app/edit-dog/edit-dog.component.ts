@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 import { DogService} from '../services/dog.service';
 import { SessionService} from '../services/session.service'
 
@@ -10,7 +11,7 @@ import { SessionService} from '../services/session.service'
 })
 export class EditDogComponent implements OnInit {
 
-  dogToEdit: any;
+  dogToEdit$: Observable<any>;
   editedDog: any;
   user: any;
   error: any;
@@ -30,15 +31,15 @@ export class EditDogComponent implements OnInit {
       .subscribe(
         (response)=> {
           this.user = response;
-          this.dogToEdit = this.dogservice.dog;
+          this.dogToEdit$ = this.dogservice.getActualDog();
         },
         (err)=> this.error = err
       )
   }
 
   changeDog(){
-    console.log(this.dogToEdit);
-    this.dogservice.edit(this.dogToEdit)
+    console.log(this.dogToEdit$);
+    this.dogservice.edit(this.dogToEdit$)
      .subscribe(
        (response) => {
         // this.router.navigate(['dog']); //ok esto sin problema pero
