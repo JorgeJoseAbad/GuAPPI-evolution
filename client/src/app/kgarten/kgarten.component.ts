@@ -48,5 +48,9 @@ updateKgarten(){
       );
   }
 
+  newMessage(newMessage:string){
+    this.message = newMessage;
+  }
+
 
 }

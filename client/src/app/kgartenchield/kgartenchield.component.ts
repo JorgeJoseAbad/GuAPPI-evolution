@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DogService } from '../services/dog.service';
 import { SessionService } from '../services/session.service';
@@ -15,6 +15,7 @@ import { SlicePipe } from "../../../node_modules/@angular/common";
 
 export class KgartenchieldComponent implements OnInit, OnChanges {
   @Input() pet: any;
+  @Output() messageEmitter = new EventEmitter<string>();
   dogName: any;
   owner: any;
   adopter: any;
@@ -94,6 +95,7 @@ export class KgartenchieldComponent implements OnInit, OnChanges {
                 this.adopter = this.user.username;
                 /*Send kagarten service the adopted pet*/
                 this.kgartenservice.traceRoute(pet);
+                this.messageEmitter.emit("Dog "+ this.dogName + " adopted by " + this.user.username)
               },
                 (err) => {
                   console.error(err);
@@ -104,7 +106,8 @@ export class KgartenchieldComponent implements OnInit, OnChanges {
         (err) => {
           console.error(err);
           this.error = err;
-        }
+        },
+        ()=> this.messageEmitter.emit("Mensaje de prueba")
       )
   }
 

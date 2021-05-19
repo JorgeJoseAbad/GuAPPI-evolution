@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpResponse} from '@angular/common/http';
+import { HttpClient,HttpResponse, HttpErrorResponse} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
@@ -17,8 +17,18 @@ export class DogService {
 
   constructor(private httpclient: HttpClient) {}
 
-  handleError(e) {
+  private handleError(e : HttpErrorResponse) {
     console.error("Error in Dog");
+    if (e.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', e.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${e.status}, ` +
+        `body was: ${e.error}`);
+    }
     return Observable.throw(e.message);
   }
 

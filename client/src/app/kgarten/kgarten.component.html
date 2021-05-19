@@ -7,12 +7,12 @@
         </h2>
         <h5>Here are the dogs sent to care</h5>
 
-         <button (click)="updateKgarten()">Update Kgarten</button>
-         <div class="note">{{message}}</div>
+        <button (click)="updateKgarten()">Update Kgarten</button>
+        <div class="note">{{message}}</div>
 
         <div id="list">
-          <div *ngFor="let pet of pets"  id="dogList">
-                  <app-kgartenchield [pet]="pet"></app-kgartenchield>
+          <div *ngFor="let pet of pets" id="dogList">
+            <app-kgartenchield (messageEmitter)="newMessage($event)" [pet]="pet"></app-kgartenchield>
           </div>
         </div>
       </div>
