@@ -3,8 +3,12 @@ h3{
     text-align: center;
 }
 
+.signup-area{
+    min-height: 420px;
+}
+
 .form-group{
-  width: 200px;
+  width: 80%;
 }
 
 .form-group label{
@@ -39,4 +43,10 @@ h3{
   font-style: normal;
   font-size: 16px;
   font-weight: normal;
+}
+
+
+.error{
+  color: red;
+  font-size: 1.2rem;
 }

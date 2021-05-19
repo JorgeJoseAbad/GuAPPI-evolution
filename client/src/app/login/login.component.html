@@ -15,7 +15,7 @@
             class="form-control"
             [(ngModel)]="formInfo.username" name="username"
             #username = "ngModel"
-            required/>
+            required>
             <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
               Name is required
             </div>
@@ -28,7 +28,7 @@
             class="form-control"
             [(ngModel)]="formInfo.password" name="password"
             #password = "ngModel"
-            required/>
+            required>
             <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
              password is required
            </div>
