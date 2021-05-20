@@ -8,7 +8,7 @@ h5{
 }
 
 .form-group{
-  width: 220px;
+  width: 80%;
 }
 
 .form-group label{
@@ -41,11 +41,11 @@ img{
 .dog-info{
   color: antiquewhite;
   font-size: 1.2rem;
-  width: inherit;
+  width: 90%;
 }
 
 .error{
   color: darkred;
   font-size: 1.2rem;
-  width: inherit;
+  width: 90%;
 }

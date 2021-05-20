@@ -1,48 +1,47 @@
-
 <div class="container">
   <div class="row">
-    <div *ngIf="this.user; else elseBlock" >
-      <h3>
-        Add a new dog to your list {{this.user.username}}
-      </h3>
-      <div class="col-sm-6 centered-form">
-        <form *ngIf="!dogSaved" class="form-group" action="/newDog" method="post">
+    <div class="col-sm-12">
+      <div *ngIf="this.user; else elseBlock">
+        <h3>
+          Add a new dog to your list {{this.user.username}}
+        </h3>
+
+        <form *ngIf="!dogSaved" (ngSubmit)="addDog()" #newDogForm="ngForm">
 
           <div class="form-group">
-            <label> Dog Name </label>
-            <input type="text" [(ngModel)]="newDog.dogName" name="dogName"/>
+            <label for="dogName"> Dog Name </label>
+            <input type="text" class="form-control" id="dogName" [(ngModel)]="newDog.dogName" name="dogName" #dogName="ngModel" required>
           </div>
 
           <div class="form-group">
-            <label> Breed </label>
-            <select  class="form-control"  id="breed" required
-                [(ngModel)]="newDog.breed" name="breed">
+            <label for="breed"> Breed </label>
+            <select class="form-control" id="breed" required [(ngModel)]="newDog.breed" name="breed" #breed="ngModel" required>
               <option *ngFor="let breed of breeds" [value]="breed">{{breed}}</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label> age </label>
-            <input type="number" [(ngModel)]="newDog.age" name="age"/>
+            <label for="age"> age </label>
+            <input type="number" class="form-control" id="age" [(ngModel)]="newDog.age" name="age" #age="ngModel" required>
           </div>
 
           <div class="form-group">
-            <label> Description </label>
-            <input type="textarea" [(ngModel)]="newDog.description" name="description"/>
+            <label for="description"> Description </label>
+            <input type="textarea" class="form-control" id="description" [(ngModel)]="newDog.description" name="description" #description="ngModel" required>
           </div>
 
           <div class="form-group">
-            <label>Photo</label>
-              <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
-            </div>
+            <label for="file">Photo</label>
+            <input type="file" name="file" class="form-control" id="file" ng2FileSelect [uploader]="uploader" required>
+          </div>
 
           <div class="form-group">
-            <label>Location</label>
-            <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+            <label for="location">Location</label>
+            <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl" required>
           </div>
           <br>
 
-          <button (click)="addDog()"> addDog </button>
+          <button type="submit" name="button">addDog</button>
 
         </form>
 
@@ -50,25 +49,26 @@
           <div *ngIf="newDog.dogName">
             <h2> We have a new dog called: {{ newDog.dogName }}!! </h2>
             <p> Here's the dog component </p>
-            <pre> {{ newDog | json }} </pre>
+            <p> {{ newDog | json }} </p>
           </div>
           <div *ngIf="!newDog.dogName">
             <h2> Error on validacion model Dog </h2>
             <p> Here's the error </p>
-            <pre> {{ newDog | json }} </pre>
+            <p> {{ newDog | json }} </p>
           </div>
         </div>
         <div *ngIf="uploaderError" class="dog-info">
           <h2> There is an error on uploader access!! </h2>
           <p> Here's the error </p>
-          <pre> {{ error | json }} </pre>
+          <p> {{ error | json }} </p>
         </div>
-          <p class="error"> {{ error }} </p>
+        <p class="error"> {{ error }} </p>
 
       </div>
+
+      <ng-template #elseBlock>
+        <div class="advert">You must be logged to add a new dog</div>
+      </ng-template>
     </div>
-    <ng-template #elseBlock >
-      <div class="advert" >You must be logged to add a new dog</div>
-    </ng-template>
   </div>
 </div>
