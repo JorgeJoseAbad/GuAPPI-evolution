@@ -23,7 +23,7 @@
     "@angular/router": "^6.1.8",
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@ngui/map": "^0.18.6",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "core-js": "^2.5.7",
     "ng2-file-upload": "^1.3.0",
     "rxjs": "^6.3.2",
